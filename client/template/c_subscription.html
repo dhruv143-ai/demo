@@ -1,0 +1,123 @@
+{% extends "c_header.html" %} {% block content %} {% load static %} {% load mathfilters %}
+
+<!-- breadcrumb-area -->
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+  <div class="bread-shapes">
+    <span class="b-shape-1 item-bounce"
+      ><img src="{% static 'assets/images/img/5.png'%}" alt=""
+    /></span>
+    <span class="b-shape-2"
+      ><img src="{% static 'assets/images/img/6.png'%}" alt=""
+    /></span>
+    <span class="b-shape-3"
+      ><img src="{% static 'assets/images/img/7.png'%}" alt=""
+    /></span>
+    <span class="b-shape-4"
+      ><img src="{% static 'assets/images/img/9.png'%}" alt=""
+    /></span>
+    <span class="b-shape-5"
+      ><img src="{% static 'assets/images/shapes/18.png'%}" alt=""
+    /></span>
+    <span class="b-shape-6 item-animateOne"
+      ><img src="{% static 'assets/images/img/7.png'%}" alt=""
+    /></span>
+  </div>
+  <div class="container padding-top-120">
+    <div class="row justify-content-center">
+      <nav aria-label="breadcrumb">
+        <h2 class="page-title">Subscription Packages</h2>
+       
+    </div>
+  </div>
+</div>
+
+<!-- food-items countdown -->
+<div class="foods-counter menus-area">
+  <div class="container">
+    <div class="row foods-wrapper menus-wrapper">
+      {% for data in sub %}
+      <div class="col-lg-3 col-md-6">
+        <div class="single-food single-menus">
+          <img src="{% static 'assets/images/menu-item/menu2.png' %}" alt="" />
+          <h6>{{ data.sub_name }}</h6>
+          <p>{{ data.sub_description }}</p>
+          <p>₹{{ data.sub_price }}</p>
+          <p>{{ data.sub_duration }} Months</p>
+      
+          {% if request.session.subscription %}
+            <button type="button" class="btn btn-secondary" style="background-color: #ff0000d5; color: rgb(255, 255, 255);" disabled>
+              Already Subscribed
+            </button>
+          {% else %}
+            <!-- Render Razorpay script for subscribing -->
+            <form method="post" action="/client/c_sub/">
+              {% csrf_token %}
+              <input type="hidden" name="sub_id" value="{{ data.sub_id }}" />
+              <input type="hidden" name="sub_duration" value="{{ data.sub_duration }}" />
+      
+              <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_18nJmtVOwMuu6G"
+                data-amount="{{ data.sub_price|mul:100 }}"
+                data-currency="INR"
+                data-order_id="{{ payment.id }}"
+                data-buttontext="Subscribe Now"
+                data-name="client"
+                data-description="Subscription Purchase"
+                data-image="/client_static/assets/images/shop/logo2.png"
+                data-prefill.name="{{ request.user.first_name }}"
+                data-prefill.email="{{ request.user.email }}"
+                data-theme.color="#F37254"
+              ></script>
+              <style>
+                .razorpay-payment-button {
+                  background-color: #b22727 !important; 
+                  color: #fff !important;
+                  padding: 10px 20px !important;
+                  font-size: 16px !important;
+                  cursor: pointer !important;
+                  border-radius: 5px !important;
+                }
+              </style>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      {% for data in messages %}
+      <span style="color: rgb(0, 0, 0)">{{data}}</span>
+      {% endfor %}
+      <!-- <div class="col-lg-3 col-md-6">
+            <div class="single-food single-menus">
+              <img src="{% static 'assets/images/menu-item/menu1.png'%}" alt="" />
+              <h6>100% Best Quality</h6>
+              <p>We Provide Best Quality Food</p>
+              <a href="shopping-cart.html">Order Now</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="single-food single-menus">
+              <img src="{% static 'assets/images/menu-item/menu3.png'%}" alt="" />
+              <h6>Money Back Guarantee</h6>
+              <p>100% Money Back Guarantee</p>
+              <a href="shopping-cart.html">Order Now</a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="single-food single-menus">
+              <img src="{% static 'assets/images/menu-item/menu4.png'%}" alt="" />
+              <h6>Delicious Food Menu</h6>
+              <p>Food Khan Provide Best Food</p>
+              <a href="shopping-cart.html">Order Now</a>
+            </div>
+          </div> -->
+        </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+{% endblock %}

@@ -1,0 +1,506 @@
+{% extends 'c_header.html' %} {% block content %} {% load static %}
+<!-- breadcrumb-area -->
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+  <div class="bread-shapes">
+    <span class="b-shape-1 item-bounce"
+      ><img src="{% static 'assets/images/img/5.png '%}" alt=""
+    /></span>
+    <span class="b-shape-2"
+      ><img src="{% static 'assets/images/img/6.png '%}" alt=""
+    /></span>
+    <span class="b-shape-3"
+      ><img src="{% static 'assets/images/img/7.png '%}" alt=""
+    /></span>
+    <span class="b-shape-4"
+      ><img src="{% static 'assets/images/img/9.png '%}" alt=""
+    /></span>
+    <span class="b-shape-5"
+      ><img src="{% static 'assets/images/shapes/18.png '%}" alt=""
+    /></span>
+    <span class="b-shape-6 item-animateOne"
+      ><img src="{% static 'assets/images/img/7.png '%}" alt=""
+    /></span>
+  </div>
+  <div class="container padding-top-120">
+    <div class="row justify-content-center">
+      <nav aria-label="breadcrumb">
+        <h2 class="page-title">Profile Page</h2>
+        <!-- <ol class="breadcrumb text-center">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Profile Page
+          </li>
+        </ol> -->
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- profile-area -->
+<section class="profile-area padding-top-120 padding-bottom-120">
+  <div class="container">
+    <div class="row align-items-start">
+      <!-- tab-buttons -->
+      <div class="col-md-4 col-lg-3">
+        <div
+          class="profile-tabs nav flex-column nav-pills me-3"
+          role="tablist"
+          aria-orientation="vertical"
+        >
+          <button
+            class="nav-link active text-start"
+            id="dahoboard-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#dahoboard"
+            type="button"
+            role="tab"
+            aria-controls="dahoboard"
+            aria-selected="true"
+          >
+            <i class="fa-solid fa-sliders inline-block"></i>
+            Dashboard
+          </button>
+          
+          <button
+            class="nav-link text-start"
+            id="order-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#order"
+            type="button"
+            role="tab"
+            aria-controls="order"
+            aria-selected="false"
+          >
+            <i class="fa-solid fa-cart-plus"></i>
+            Orders
+          </button>
+
+          <a href="/client/my_recipe/"
+            ><button
+              class="nav-link text-start"
+              type="button"
+              role="tab"
+              aria-controls="order"
+              aria-selected="false"
+            >
+              <i class="fa-solid fa-cart-plus"></i>
+              My Recipes
+            </button></a
+          >
+
+          <a href="/client/wishlist/"
+            ><button
+              class="nav-link text-start"
+              type="button"
+              role="tab"
+              aria-controls="order"
+              aria-selected="false"
+            >
+              <i class="fa-solid fa-cart-plus"></i>
+              Wishlist
+            </button></a
+          >
+
+          <button
+            class="nav-link text-start"
+            id="track-order-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#track-order"
+            type="button"
+            role="tab"
+            aria-controls="track-order"
+            aria-selected="false"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            My reviews
+          </button>
+          
+           
+          <button
+            class="nav-link text-start"
+            id="account-details-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#account-details"
+            type="button"
+            role="tab"
+            aria-controls="account-details"
+            aria-selected="false"
+          >
+            <i class="fa-regular fa-user"></i>
+            Account Details
+          </button>
+        </div>
+      </div>
+      <!-- tab-content -->
+      <div class="col-md-8 col-lg-9">
+        <div class="tab-content">
+          <!-- dahoboard-tab -->
+          <div
+            class="tab-pane fade show active"
+            id="dahoboard"
+            role="tabpanel"
+            aria-labelledby="dahoboard-tab"
+            tabindex="0"
+          >
+            <h5 class="tab-title">Hello <span>{{user.user_name}}!</span></h5>
+            <h6>
+              In your account. you can easily check &amp; view your
+             orders.<br />
+        </h6><br><br>
+       <h6> Have a dish you can’t identify? Our AI Recipe Generator is here to help! 
+        Upload an image, and we’ll create recipe suggestions based on what’s 
+        in the picture! 🍴🤖</h6>
+
+
+        
+            <div class="recent-orders margin-top-40">
+              <!-- <h5 class="margin-bottom-30">Recent Orders</h5> -->
+              <div class="table-responsive">
+                <!-- <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                          <th>Username</th>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Payment Status</th>
+                          <th>Delivery Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   
+                    {% for data in hp %}
+                    <tr>
+                        <td>{{data.order_id}}</td>
+                        <td>{{data.user_id.user_name}}</td>
+                        <td>{{data.order_date}}</td>
+                        <td>{{data.total_amt}}</td>
+                        <td>{{data.payment_status}}</td>
+                        <td>{{data.delivery_status}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table> -->
+              </div>
+             
+            </div>
+          </div>
+          <!-- order-tab -->
+          <div
+            class="tab-pane fade"
+            id="order"
+            role="tabpanel"
+            aria-labelledby="order-tab"
+            tabindex="0"
+          >
+            <h5 class="margin-bottom-30">Your Orders</h5>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Username</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Payment Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in order %}
+                  <tr>
+                    <td>{{data.order_id}}</td>
+                    <td>{{data.user_id.user_name}}</td>
+                    <td>{{data.order_date}}</td>
+                    <td>{{data.total_amt}}</td>
+                    <td>{{data.payment_status}}</td>
+                    <td><a href="/client/c_order_item/{{data.order_id}}">View Item</a></td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination" style="margin-left: 40%;">
+              <div class="container">
+                <div class="pagination">
+                  <ul class="pagination" style="display: flex;">
+                    {% if order.has_previous %}
+                    <li><a href="?page={{ order.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+  
+                    {% for i in order.paginator.page_range %}
+                    {% if order.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+  
+                    {% if order.has_next %}
+                    <li><a href="?page={{ order.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+        
+          </div>
+          <!-- review-post-tab -->
+          <div
+            class="tab-pane fade"
+            id="track-order"
+            role="tabpanel"
+            aria-labelledby="track-order-tab"
+            tabindex="0"
+          >
+          <h5 class="tab-title">Reviews Posted</h5>
+          {% for data in review %}
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Recipe Name</th>
+                  <th>Reviews</th>
+                  <th>Review Date</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{data.recipe_id.recipe_name}}</td>
+                  <td>{{data.review_feedback}}</td>
+                  <td>{{data.review_date}}</td>
+                </tr>
+              </tbody>
+            </table>
+            {% endfor %}
+          </div>
+          <!-- subscription-tab -->
+
+          <!-- address-tab -->
+          <div
+            class="tab-pane fade"
+            id="address"
+            role="tabpanel"
+            aria-labelledby="address-tab"
+            tabindex="0"
+          >
+            <div class="front-address" id="front-address">
+              <div class="row">
+                <div class="col-lg-6">
+                  <h5 class="tab-title">Billing Address</h5>
+                  <ul>
+                    <li>Uttara, Dhaka</li>
+                    <li>Yello Road, Bangladesh</li>
+                    <li>Dhaka</li>
+                    <li>1230</li>
+                    <li><a href="#" class="edit-address">Edit</a></li>
+                  </ul>
+                </div>
+                <div class="col-lg-6">
+                  <h5 class="tab-title">Shipping Address</h5>
+                  <ul>
+                    <li>4299 Express Lane</li>
+                    <li>Sarasota,</li>
+                    <li>FL 34249 USA.</li>
+                    <li>Phone: 1.941.227.4444</li>
+                    <li>Sarasota</li>
+                    <li><a href="#" class="edit-address">Edit</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="edit-address-form" id="edit-address-form">
+              <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-6">
+                    <h5 class="tab-title">Billing Address</h5>
+                    <div class="mb-3">
+                      <label for="billing-address-1" class="form-label"
+                        >Address Line 1</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="billing-address-1"
+                        value="{{area.area_address}}"
+                        name="area_id"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="billing-address-2" class="form-label"
+                        >Address Line 2</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="billing-address-2"
+                        value=""
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="billing-town" class="form-label">Town</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="billing-town"
+                        value=""
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="billing-zip" class="form-label"
+                        >Post / Area / Zip Code</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="billing-zip"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <h5 class="tab-title">Shipping Address</h5>
+                    <div class="mb-3">
+                      <label for="address-1" class="form-label"
+                        >Address Line 1</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="address-1"
+                        value="Uttara Dhaka"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="address-2" class="form-label"
+                        >Address Line 2</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="address-2"
+                        value="Yello Road, Bangladesh"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="town" class="form-label">Town</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="town"
+                        value="Dhaka"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="zip" class="form-label"
+                        >Post / Area / Zip Code</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="zip"
+                        value="1230"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-primary" id="back-btn">Back</button>
+              </form>
+            </div>
+          </div>
+          <!-- account-details -->
+          <div
+            class="tab-pane fade"
+            id="account-details"
+            role="tabpanel"
+            aria-labelledby="account-details-tab"
+            tabindex="0"
+          >
+            <form method="post">
+              {% csrf_token %}
+              <!-- account-details -->
+              <div class="account-details">
+                <h5 class="tab-title">Account Details</h5>
+                <div class="mb-3">
+                  <label for="userName" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="userName"
+                    name="user_name"
+                    value="{{ user.user_name }}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="userPhone" class="form-label">Phone Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="userPhone"
+                    name="user_contact"
+                    value="{{user.user_contact}}"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value="{{user.email}}"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <br />
+                  <select name="area_id" id="address" class = "form-control" required>
+                    {% for data in area %}
+                    <option value="{{data.area_id}}" {% if data.area_id == user.area_id.area_id %} selected {% endif %}>
+                      {{data.area_address}}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <br>
+                <div class="mb-3">
+                  <h5><label class="form-label">Subscription</label></h5>{{user.sub_id.sub_name}} 
+                </div>
+                <br>
+              </div>
+              <!-- password-change -->
+              <div class="password-change">
+                <h5 class="tab-title">Change Password</h5>
+                <div class="mb-3">
+                  <label for="currentPass" class="form-label"
+                    >Current Password</label
+                  >
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="currentPass"
+                    value="{{user.password}}"
+                  />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

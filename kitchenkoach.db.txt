@@ -1,0 +1,1092 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 14, 2025 at 06:35 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `kitchenkoach`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `area`
+--
+
+CREATE TABLE `area` (
+  `area_id` int(11) NOT NULL,
+  `area_address` varchar(100) NOT NULL,
+  `area_pincode` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `area`
+--
+
+INSERT INTO `area` (`area_id`, `area_address`, `area_pincode`) VALUES
+(1, 'Gujarat', '356214'),
+(2, 'Goa', '356985'),
+(3, 'Rajasthan', '345896'),
+(4, 'Kolkata', '347896'),
+(5, 'UP', '314596');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_group`
+--
+
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint(20) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_permission`
+--
+
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
+(1, 'Can add area', 1, 'add_area'),
+(2, 'Can change area', 1, 'change_area'),
+(3, 'Can delete area', 1, 'delete_area'),
+(4, 'Can view area', 1, 'view_area'),
+(5, 'Can add category', 2, 'add_category'),
+(6, 'Can change category', 2, 'change_category'),
+(7, 'Can delete category', 2, 'delete_category'),
+(8, 'Can view category', 2, 'view_category'),
+(9, 'Can add order', 3, 'add_order'),
+(10, 'Can change order', 3, 'change_order'),
+(11, 'Can delete order', 3, 'delete_order'),
+(12, 'Can view order', 3, 'view_order'),
+(13, 'Can add product', 4, 'add_product'),
+(14, 'Can change product', 4, 'change_product'),
+(15, 'Can delete product', 4, 'delete_product'),
+(16, 'Can view product', 4, 'view_product'),
+(17, 'Can add subscription', 5, 'add_subscription'),
+(18, 'Can change subscription', 5, 'change_subscription'),
+(19, 'Can delete subscription', 5, 'delete_subscription'),
+(20, 'Can view subscription', 5, 'view_subscription'),
+(21, 'Can add order_ item', 6, 'add_order_item'),
+(22, 'Can change order_ item', 6, 'change_order_item'),
+(23, 'Can delete order_ item', 6, 'delete_order_item'),
+(24, 'Can view order_ item', 6, 'view_order_item'),
+(25, 'Can add sub_category', 7, 'add_sub_category'),
+(26, 'Can change sub_category', 7, 'change_sub_category'),
+(27, 'Can delete sub_category', 7, 'delete_sub_category'),
+(28, 'Can view sub_category', 7, 'view_sub_category'),
+(29, 'Can add recipe', 8, 'add_recipe'),
+(30, 'Can change recipe', 8, 'change_recipe'),
+(31, 'Can delete recipe', 8, 'delete_recipe'),
+(32, 'Can view recipe', 8, 'view_recipe'),
+(33, 'Can add user', 9, 'add_user'),
+(34, 'Can change user', 9, 'change_user'),
+(35, 'Can delete user', 9, 'delete_user'),
+(36, 'Can view user', 9, 'view_user'),
+(37, 'Can add review', 10, 'add_review'),
+(38, 'Can change review', 10, 'change_review'),
+(39, 'Can delete review', 10, 'delete_review'),
+(40, 'Can view review', 10, 'view_review'),
+(41, 'Can add notification', 11, 'add_notification'),
+(42, 'Can change notification', 11, 'change_notification'),
+(43, 'Can delete notification', 11, 'delete_notification'),
+(44, 'Can view notification', 11, 'view_notification'),
+(45, 'Can add login', 12, 'add_login'),
+(46, 'Can change login', 12, 'change_login'),
+(47, 'Can delete login', 12, 'delete_login'),
+(48, 'Can view login', 12, 'view_login'),
+(49, 'Can add cart', 13, 'add_cart'),
+(50, 'Can change cart', 13, 'change_cart'),
+(51, 'Can delete cart', 13, 'delete_cart'),
+(52, 'Can view cart', 13, 'view_cart'),
+(53, 'Can add wishlist', 14, 'add_wishlist'),
+(54, 'Can change wishlist', 14, 'change_wishlist'),
+(55, 'Can delete wishlist', 14, 'delete_wishlist'),
+(56, 'Can view wishlist', 14, 'view_wishlist'),
+(57, 'Can add log entry', 15, 'add_logentry'),
+(58, 'Can change log entry', 15, 'change_logentry'),
+(59, 'Can delete log entry', 15, 'delete_logentry'),
+(60, 'Can view log entry', 15, 'view_logentry'),
+(61, 'Can add permission', 16, 'add_permission'),
+(62, 'Can change permission', 16, 'change_permission'),
+(63, 'Can delete permission', 16, 'delete_permission'),
+(64, 'Can view permission', 16, 'view_permission'),
+(65, 'Can add group', 17, 'add_group'),
+(66, 'Can change group', 17, 'change_group'),
+(67, 'Can delete group', 17, 'delete_group'),
+(68, 'Can view group', 17, 'view_group'),
+(69, 'Can add user', 18, 'add_user'),
+(70, 'Can change user', 18, 'change_user'),
+(71, 'Can delete user', 18, 'delete_user'),
+(72, 'Can view user', 18, 'view_user'),
+(73, 'Can add content type', 19, 'add_contenttype'),
+(74, 'Can change content type', 19, 'change_contenttype'),
+(75, 'Can delete content type', 19, 'delete_contenttype'),
+(76, 'Can view content type', 19, 'view_contenttype'),
+(77, 'Can add session', 20, 'add_session'),
+(78, 'Can change session', 20, 'change_session'),
+(79, 'Can delete session', 20, 'delete_session'),
+(80, 'Can view session', 20, 'view_session');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_user`
+--
+
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+CREATE TABLE `auth_user_groups` (
+  `id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+CREATE TABLE `auth_user_user_permissions` (
+  `id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `cart_qty` int(11) NOT NULL,
+  `cart_price` int(11) NOT NULL,
+  `product_id_id` int(11) DEFAULT NULL,
+  `user_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(1, 'Italian'),
+(2, 'Punjabi'),
+(3, 'Chinese'),
+(4, 'Mexican'),
+(5, 'Thai'),
+(6, 'South Indian'),
+(7, 'French');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext DEFAULT NULL,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) UNSIGNED NOT NULL CHECK (`action_flag` >= 0),
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_content_type`
+--
+
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
+(15, 'admin', 'logentry'),
+(1, 'adminkitchenkoach', 'area'),
+(13, 'adminkitchenkoach', 'cart'),
+(2, 'adminkitchenkoach', 'category'),
+(12, 'adminkitchenkoach', 'login'),
+(11, 'adminkitchenkoach', 'notification'),
+(3, 'adminkitchenkoach', 'order'),
+(6, 'adminkitchenkoach', 'order_item'),
+(4, 'adminkitchenkoach', 'product'),
+(8, 'adminkitchenkoach', 'recipe'),
+(10, 'adminkitchenkoach', 'review'),
+(5, 'adminkitchenkoach', 'subscription'),
+(7, 'adminkitchenkoach', 'sub_category'),
+(9, 'adminkitchenkoach', 'user'),
+(14, 'adminkitchenkoach', 'wishlist'),
+(17, 'auth', 'group'),
+(16, 'auth', 'permission'),
+(18, 'auth', 'user'),
+(19, 'contenttypes', 'contenttype'),
+(20, 'sessions', 'session');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_migrations`
+--
+
+CREATE TABLE `django_migrations` (
+  `id` bigint(20) NOT NULL,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
+(1, 'contenttypes', '0001_initial', '2025-02-13 04:45:41.015977'),
+(2, 'auth', '0001_initial', '2025-02-13 04:45:41.851696'),
+(3, 'admin', '0001_initial', '2025-02-13 04:45:42.050311'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2025-02-13 04:45:42.081949'),
+(5, 'admin', '0003_logentry_add_action_flag_choices', '2025-02-13 04:45:42.081949'),
+(6, 'adminkitchenkoach', '0001_initial', '2025-02-13 04:45:43.713894'),
+(7, 'contenttypes', '0002_remove_content_type_name', '2025-02-13 04:45:43.808839'),
+(8, 'auth', '0002_alter_permission_name_max_length', '2025-02-13 04:45:43.900143'),
+(9, 'auth', '0003_alter_user_email_max_length', '2025-02-13 04:45:43.915941'),
+(10, 'auth', '0004_alter_user_username_opts', '2025-02-13 04:45:43.923647'),
+(11, 'auth', '0005_alter_user_last_login_null', '2025-02-13 04:45:43.984007'),
+(12, 'auth', '0006_require_contenttypes_0002', '2025-02-13 04:45:43.984007'),
+(13, 'auth', '0007_alter_validators_add_error_messages', '2025-02-13 04:45:43.999694'),
+(14, 'auth', '0008_alter_user_username_max_length', '2025-02-13 04:45:44.021704'),
+(15, 'auth', '0009_alter_user_last_name_max_length', '2025-02-13 04:45:44.039219'),
+(16, 'auth', '0010_alter_group_name_max_length', '2025-02-13 04:45:44.056029'),
+(17, 'auth', '0011_update_proxy_permissions', '2025-02-13 04:45:44.068993'),
+(18, 'auth', '0012_alter_user_first_name_max_length', '2025-02-13 04:45:44.087503'),
+(19, 'sessions', '0001_initial', '2025-02-13 04:45:44.119061'),
+(20, 'adminkitchenkoach', '0002_alter_recipe_recipe_image1', '2025-02-17 10:20:20.351933'),
+(21, 'adminkitchenkoach', '0003_alter_recipe_recipe_image1', '2025-02-17 10:21:12.076316'),
+(22, 'adminkitchenkoach', '0004_gallery', '2025-03-16 15:02:34.523987'),
+(23, 'adminkitchenkoach', '0005_remove_gallery_description', '2025-03-16 15:02:34.552494'),
+(24, 'adminkitchenkoach', '0006_delete_gallery', '2025-03-16 15:02:34.571821'),
+(25, 'adminkitchenkoach', '0007_alter_recipe_recipe_image', '2025-03-16 15:02:34.648561'),
+(26, 'adminkitchenkoach', '0008_order_city_order_contact_order_email_and_more', '2025-03-16 15:02:34.850661'),
+(27, 'adminkitchenkoach', '0009_recipe_steps', '2025-03-16 15:02:34.875782'),
+(28, 'adminkitchenkoach', '0010_remove_notification_user_id_and_more', '2025-04-14 07:05:13.789230');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `django_session`
+--
+
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('28hzeqzpie13w2c771disjnu00bi41y9', '.eJyrVipJzU3MzFGyUipOLM2tTMxKzMwzNDc0ckgHCesl5-cq6ShlpihZGeso5SXmpgIVFmVWJgIFYfpA3OKMxAwDEyMDAwsUfcWlScXJRZkFJZn5eUATagHIwyQP:1u4MRl:JUadT_YJBgv0AbWX-2wE2-7cqN1-TeaMpGJHULVjn_k', '2025-04-28 16:14:09.797461'),
+('92v9k9br9fofat1hg4rjbtvzh44u24rv', '.eJyrVspMUbIy1FHKS8xNVbJSKk4sza1MVNJRSs1NzMyBC2QlZuYZmhsaOaSDhPWS83OVagEsmRM-:1tjflG:sSTsvd43gFM2xRFIAcXpRLzRjgdTTOK2mlAfIrQs470', '2025-03-02 14:36:46.852631'),
+('iiqlfwybpzm30ppsz32grt461zui1mkq', '.eJyrVspMUbIy1FHKS8xNVbJSKk4sza1MVNJRSs1NzMyBC2QlZuYZmhsaOaSDhPWS83OVagEsmRM-:1tny8f:BefcIi6b0e5S_hbSKZ2GrC1UMEh_IADEA4S4Qoo8Jf0', '2025-03-14 11:02:41.100375'),
+('k5hhqgyywvjozura69nu5hd1rq53yjg1', '.eJyrVspMUbIy1FHKS8xNVbJSKk4sza1MVNJRSs1NzMyBC2QlZuYZmhsaOaSDhPWS83OBSopLk4qTizILSjLz85SsjGsBqIAZQA:1tyDrI:Ie8lId7jkgshANKL6ffw2uRu9KmdcvrnzXo79h9WKM0', '2025-04-11 17:51:08.813240'),
+('m0axqu6bes4egaiyrxyaioocxp1f94rr', '.eJyrVspMUbIy1FHKS8xNVbJSKk4sza1MVNJRSs1NzMyBC2QlZuYZmhsaOaSDhPWS83OVagEsmRM-:1tisZf:1_ni5vtwFVAo5BvdYTGNaQ9TkAgzbkwfO42OdUe7PGc', '2025-02-28 10:05:31.686081');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL,
+  `order_date` date NOT NULL,
+  `total_amt` int(11) NOT NULL,
+  `payment_status` varchar(200) NOT NULL,
+  `user_id_id` int(11) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `contact` varchar(10) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `street_add` varchar(200) DEFAULT NULL,
+  `zip_code` varchar(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`order_id`, `order_date`, `total_amt`, `payment_status`, `user_id_id`, `city`, `contact`, `email`, `street_add`, `zip_code`) VALUES
+(1, '2025-02-13', 3000, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(2, '2025-02-14', 1000, 'Paid', 2, NULL, NULL, NULL, NULL, NULL),
+(3, '2025-02-13', 1500, 'Paid', 3, NULL, NULL, NULL, NULL, NULL),
+(4, '2025-02-13', 1600, 'Pending', 5, NULL, NULL, NULL, NULL, NULL),
+(5, '2025-02-12', 500, 'Paid', 8, NULL, NULL, NULL, NULL, NULL),
+(6, '2025-03-17', 580, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(7, '2025-03-28', 120, 'Pending', 11, '1', '8128331712', 'ankit78@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(8, '2025-04-13', 80, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(9, '2025-04-14', 120, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(10, '2025-04-14', 400, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(11, '2025-04-14', 200, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(12, '2025-04-14', 200, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(13, '2025-04-14', 40, 'Payment done', 1, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481'),
+(14, '2025-04-14', 600, 'Payment done', 12, '1', '8128331712', 'saumyajain1712@gmail.com', 'Rajesh Bhai, v-4 ghanshyam complex, chandlodiya, Daskroi, Ahmedabad Chandlodiya, Gujarat', '382481');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_item`
+--
+
+CREATE TABLE `order_item` (
+  `order_item_id` int(11) NOT NULL,
+  `order_item_qty` int(11) NOT NULL,
+  `order_item_price` int(11) NOT NULL,
+  `order_id_id` int(11) DEFAULT NULL,
+  `product_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_item`
+--
+
+INSERT INTO `order_item` (`order_item_id`, `order_item_qty`, `order_item_price`, `order_id_id`, `product_id_id`) VALUES
+(1, 5, 400, 1, 1),
+(2, 2, 200, 4, 3),
+(3, 1, 100, 1, 4),
+(4, 5, 2000, 2, 2),
+(5, 1, 500, 3, 1),
+(6, 10, 50, 6, 1),
+(7, 2, 40, 6, 2),
+(8, 3, 40, 7, 2),
+(9, 2, 40, 8, 2),
+(10, 3, 40, 9, 2),
+(11, 2, 200, 10, 3),
+(12, 2, 100, 11, 4),
+(13, 2, 100, 12, 4),
+(14, 1, 40, 13, 2),
+(15, 3, 200, 14, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `product_desc` varchar(500) NOT NULL,
+  `product_weight` varchar(100) NOT NULL,
+  `product_price` int(11) NOT NULL,
+  `product_image` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`product_id`, `product_name`, `product_desc`, `product_weight`, `product_price`, `product_image`) VALUES
+(1, 'Chocolate', 'This is chocolate', '50 gm', 50, 'Milk Chocolate.jpg'),
+(2, 'Bread', 'This is bread', '50 gm', 40, 'Bread.jpg'),
+(3, 'Sugar', 'This is sugar', '100 gm', 200, 'Sugar.jpg'),
+(4, 'Pasta', 'This is pasta', '500 gm', 100, 'Pasta.jpg'),
+(5, 'Yogurt', 'This is yogurt', '100 gm', 50, 'yogurt.jpg'),
+(6, 'Honey', 'This is honey', '100 gm', 200, 'honey.jpg'),
+(7, 'Rajma', 'Rajma', '500 gm', 100, 'beans.jpg'),
+(8, 'cinammon', 'This is cinammon', '100 gm', 200, 'cinammon.jpg'),
+(9, 'Raw paneer', 'This is raw paneer', '100 gm', 50, 'rawpaneer.jpg'),
+(10, 'Berries', 'This is berries', '200 gm', 300, 'berries.jpg'),
+(11, 'Broccoli', 'Broccoli', '500 gm', 200, 'broccoli.jpg'),
+(12, 'Cashews', 'This is cashews', '100 gm', 200, 'cashews.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recipe`
+--
+
+CREATE TABLE `recipe` (
+  `recipe_id` int(11) NOT NULL,
+  `recipe_name` varchar(100) NOT NULL,
+  `recipe_desc` varchar(500) NOT NULL,
+  `ingridents` varchar(1500) NOT NULL,
+  `recipe_prepare_time` varchar(100) NOT NULL,
+  `recipe_cooking_time` varchar(100) NOT NULL,
+  `recipe_video` varchar(100) NOT NULL,
+  `recipe_image` varchar(100) DEFAULT NULL,
+  `calories` varchar(100) NOT NULL,
+  `fat` varchar(100) NOT NULL,
+  `carbs` varchar(100) NOT NULL,
+  `protein` varchar(100) NOT NULL,
+  `recipe_image1` varchar(100) DEFAULT NULL,
+  `recipe_image2` varchar(100) DEFAULT NULL,
+  `recipe_image3` varchar(100) DEFAULT NULL,
+  `recipe_image4` varchar(100) DEFAULT NULL,
+  `sub_category_id_id` int(11) DEFAULT NULL,
+  `user_id_id` int(11) DEFAULT NULL,
+  `steps` varchar(1500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `recipe`
+--
+
+INSERT INTO `recipe` (`recipe_id`, `recipe_name`, `recipe_desc`, `ingridents`, `recipe_prepare_time`, `recipe_cooking_time`, `recipe_video`, `recipe_image`, `calories`, `fat`, `carbs`, `protein`, `recipe_image1`, `recipe_image2`, `recipe_image3`, `recipe_image4`, `sub_category_id_id`, `user_id_id`, `steps`) VALUES
+(1, 'Margherita pizza', 'A simple yet delicious pizza topped with tomato sauce, fresh mozzarella, basil, and olive oil.', '1 pizza dough,\r\n ½ cup tomato sauce,  \r\n 1 cup fresh mozzarella (sliced),  \r\n 5-6 fresh basil leaves,\r\n 1 tbsp olive oil,\r\n ½ tsp salt,', '15 minutes', '15 minutes', 'pizza.mp4', 'pizzamain.jpg', '1000 kcal', '60 gm', '180 gm', '54 gm', 'pizza1.jpg', 'pizza2.jpg', 'pizza3.jpeg', 'pizza4.jpg', NULL, 1, '1 : Preheat the oven to 475°F (245°C).\r\n2 : Roll out the pizza dough on a floured surface.\r\n3 : Spread tomato sauce evenly over the dough.\r\n4 : Place mozzarella slices and basil leaves on top.\r\n5 : Drizzle with olive oil and sprinkle with salt.\r\n6 : Bake for 10-12 minutes or until the crust is golden brown.'),
+(2, 'Pasta Primavera', 'A fresh pasta dish loaded with seasonal vegetables and tossed in olive oil.', '250g pasta (penne or spaghetti),  \r\n 1 zucchini (sliced),  \r\n 1 bell pepper (sliced),  \r\n ½ cup cherry tomatoes (halved),  \r\n 2 tbsp olive oil,  \r\n 2 cloves garlic (minced),  \r\n ½ tsp salt,  \r\n ½ tsp black pepper,  \r\n ½ cup grated Parmesan cheese,', '15 minutes', '20 minutes', 'Pasta Primavera.mp4', 'Pasta Primavera.jpg', '400 kcal', '15 gm', '70 gm', '20 gm', 'pasta1.jpg', 'pasta2.jpg', 'pasta3.jpg', 'pasta4.jpg', 2, 1, '1 : Cook pasta according to package instructions; drain and set aside.\r\n2 : Heat olive oil in a pan and sauté garlic until fragrant.\r\n3 : Add zucchini, bell peppers, and cherry tomatoes; cook for 5 minutes.\r\n4 : Toss the cooked pasta with the vegetables and season with salt and pepper.\r\n5 : Garnish with Parmesan cheese and serve.'),
+(3, 'Minestrone Soup', 'Italian Minestrone Soup is a hearty and wholesome vegetable-based soup that originates from Italy. Known for its rich flavors and versatility, minestrone is traditionally made with a mix of seasonal vegetables, beans, pasta or rice, and a savory tomato broth.', '1 onion (chopped),\r\n 2 carrots (chopped),  \r\n 2 celery stalks (chopped), \r\n 1 zucchini (chopped),\r\n 1 can diced tomatoes,\r\n 4 cups vegetable broth, \r\n 1 cup cooked beans (kidney or cannellini), \r\n ½ cup small pasta (elbow or shell), \r\n 1 tsp dried oregano,\r\n ½ tsp salt,\r\n ½ tsp black pepper,', '20 minutes', '30 minutes', 'Minestrone Soup.mp4', 'Minestrone Soup.jpg', '150 kcal', '7 gm', '40 gm', '10 gm', 'msoup1.jpg', 'msoup2.jpg', 'msoup3.jpg', 'msoup4.jpg', 3, 1, '1 : Heat oil in a large pot and sauté onions, carrots, and celery for 5 minutes.\r\n2 : Add zucchini, diced tomatoes, vegetable broth, and beans.\r\n3 : Bring to a boil, then add pasta and seasonings.\r\n4 : Simmer until pasta is tender, then serve hot.'),
+(4, 'Eggplant Parmesan', 'A layered dish of breaded eggplant, marinara sauce, and mozzarella cheese.', '2 eggplants (sliced),\r\n 1 cup breadcrumbs,  \r\n ½ cup grated Parmesan cheese,  \r\n 1 cup marinara sauce,  \r\n 1 cup mozzarella cheese (shredded),  \r\n 2 tbsp olive oil,', '30 minutes', '35 minutes', 'Eggplant Parmesan.mp4', 'Eggplant Parmesan.jpg', '300 kcal', '25 gm', '40 gm', '18 gm', 'eggplant1.jpg', 'Eggplant Parmesan2.jpg', 'Eggplant Parmesan3.jpg', 'Eggplant Parmesan4.jpg', 4, NULL, '1 : Preheat the oven to 375°F (190°C).\r\n2 : Dip eggplant slices in breadcrumbs and Parmesan cheese.\r\n3 : Fry in olive oil until golden brown.\r\n4 : Layer eggplant slices, marinara sauce, and mozzarella cheese in a baking dish.\r\n5 : Bake for 25-30 minutes and serve hot.'),
+(5, 'Chole', 'A flavorful chickpea curry with a rich tomato-based gravy.', '2 cups chickpeas (boiled),  \r\n 1 onion (chopped),\r\n 2 tomatoes (pureed),  \r\n 1 tbsp ginger-garlic paste,  \r\n 1 tsp garam masala,\r\n 1 tbsp oil,', '1 hour', '30 minutes', 'chole masala.mp4', 'chole masala.jpg', '250 kcal', '15 gm', '45 gm', '15 gm', 'chole1.jpg', 'chole2.jpg', 'chole3.jpg', 'chole4.jpg', 6, NULL, '1 : Heat oil and sauté onions until golden brown.\r\n2 : Add ginger-garlic paste, tomatoes, and spices; cook for 5 minutes.\r\n3 : Add boiled chickpeas and simmer for 10 minutes.'),
+(7, 'rajma', 'A hearty kidney bean curry served with rice.', '1 cup kidney beans (soaked overnight),   \r\n 2 tomatoes (chopped),  \r\n 1 tsp garam masala,  \r\n ½ tsp salt,  \r\n 1 tbsp oil,', '1 hour', '30 minutes', 'rajma.mp4', 'rajma.jpg', '200 kcal', '12 gm', '50 gm', '16 gm', 'rajma1.jpg', 'rajma2.jpg', 'rajma3.jpg', 'rajma4.jpg', 7, NULL, '1 : Boil kidney beans until soft.  \r\n2 : Sauté tomatoes, and spices in oil.  \r\n3 :  Add beans and simmer for 15 minutes.'),
+(8, 'Paneer Tikka', 'Spiced, grilled cottage cheese cubes.', '1 cup paneer (cubed), \r\n ½ cup yogurt,\r\n capsicum,\r\n onion,\r\n 1 tsp turmeric,  \r\n 1 tsp red chili powder,  \r\n ½ tsp salt,', '20 minutes', '20 minutes', 'paneer tikka.mp4', 'paneer tikka.jpg', '300 kcal', '30 gm', '25 gm', '25 gm', 'pt1.jpg', 'pt2.jpg', 'pt3.jpg', 'pt4.jpg', 8, NULL, '1 : Marinate paneer cubes in yogurt, spices, capsicum, onion, and salt.  \r\n2 : Grill until golden brown.'),
+(9, 'Aloo Paratha', 'A stuffed flatbread with spiced mashed potatoes.', '2 cups wheat flour,  \r\n 2 potatoes (boiled and mashed),  \r\n ½ tsp salt,  \r\n ½ tsp cumin seeds,  \r\n 1 tbsp butter,', '15 minutes', '15 minutes', 'aloo paratha.mp4', 'aloo paratha.jpg', '300 kcal', '25 gm', '70 gm', '12 gm', 'al1.jpg', 'al2.jpg', 'al3.jpg', 'al4.jpg', 9, NULL, '1 : Mix mashed potatoes with salt and cumin.  \r\n2 : Stuff into rolled-out dough and seal.  \r\n3 : Cook on a hot pan with butter until golden.'),
+(10, 'Fried Rice', 'Stir-fried rice with mixed vegetables, soy sauce, and sesame oil.', '2 cups cooked rice (preferably day-old),\r\n½ cup carrots (diced),\r\n½ cup green peas,\r\n½ cup bell peppers (chopped),\r\n2 tbsp soy sauce,\r\n1 tbsp sesame oil,\r\n1 tsp ginger (minced),\r\n1 tsp garlic (minced),', '30 minutes', '15 minutes', 'fried rice.mp4', 'fried rice.jpg', '200 kcal', '15 gm', '50 gm', '12 gm', 'fr1.jpg', 'fr2.jpg', 'fr3.jpg', 'fr4.jpg', 10, NULL, '1 : Heat sesame oil in a pan and sauté garlic and ginger.\r\n2 : Add carrots, peas, and bell peppers; stir-fry for 3 minutes.\r\n3 : Add cooked rice and soy sauce; mix well.\r\n4 : Cook for another 3 minutes and serve hot.'),
+(11, 'Mapo Tofu', 'A spicy tofu dish in a rich, chili-based sauce.', '1 block firm tofu (cubed),\r\n2 tbsp chili bean paste,\r\n1 tbsp soy sauce,\r\n1 tsp Sichuan peppercorns,\r\n1 tsp garlic (minced),\r\n1 tbsp oil,', '20 minutes', '20 minutes', 'mapo tofu.mp4', 'mapo tofu.jpg', '250 kcal', '20 gm', '25 gm', '20 gm', 'mt1.jpg', 'mt2.jpg', 'mt3.jpg', 'mt4.jpg', 11, NULL, '1 : Heat oil in a pan and sauté garlic and Sichuan peppercorns.\r\n2 : Add chili bean paste and soy sauce.\r\n3 : Add tofu cubes and cook for 5 minutes.'),
+(12, 'Spring Rolls', 'Crispy rolls filled with shredded vegetables.', '1 cup cabbage (shredded),\r\n½ cup carrots (julienned),\r\n½ cup mushrooms (sliced),\r\n1 tbsp soy sauce,\r\n10 spring roll wrappers,\r\n1 tbsp cornstarch (for sealing),', '30 minutes', '15 minutes', 'spring rolls.mp4', 'spring rolls.jpg', '250 kcal', '20 gm', '40 gm', '7 gm', 'sr1.jpg', 'sr2.jpg', 'sr3.jpg', 'sr4.jpg', 12, NULL, '1 : Stir-fry cabbage, carrots, and mushrooms with soy sauce.\r\n2 : Place filling in spring roll wrappers and roll tightly.\r\n3 : Seal with cornstarch paste and deep-fry until golden brown.'),
+(13, 'Hot and Sour Soup', 'A tangy and spicy soup with chopped vegetables.', '2-3 Tsp Oil,\r\n1 Tbsp Finely Chopped Garlic,\r\n1 Tbsp Ginger -Crushed or Grated,\r\n1 Small Sized Onion,\r\n1 Green Chilli,\r\n1/4 Cup French Beans,\r\n1/4 Cup Chopped Carrots,\r\n1/2 Cup Finely Chopped Cabbage,\r\n1-2 Baby Corn1-2 Tbsp Chilli Sauce,\r\n1/4 Tsp Red Chilli Powder,\r\n1/4 Tsp Crushed Black Pepper,\r\n2 Tbsp Soya Sauce,\r\n3 Cups Water,\r\n1/4 Tsp Vinegar,\r\nSalt as per Taste,\r\n1/2 Tbsp Spring Onion\' green part,\r\nCornflour Slurry (2 Tbsp Cornflour + 1/4 Cup Water),', '15 minutes', '10 minutes', 'hot and sour.mp4', 'hot and sour.jpg', '100 kcal', '6 gm', '20 gm', '7 gm', 'hs1.jpg', 'hs2.jpg', 'hs3.jpg', 'hs4.jpg', 13, NULL, '1 : when oil is hot, add vegetables and stir them for 5 minutes.\r\n2 : Add vinegar, soy sauce, and chili paste.\r\n3 : Simmer for 10 minutes and serve.\r\n4 : Stir-Fried Bok Choy with Garlic.'),
+(14, 'Tacos', 'Soft corn tortillas filled with grilled vegetables and salsa.', '2 corn tortillas,\r\n½ cup bell peppers (sliced),\r\n½ cup zucchini (sliced),\r\n¼ cup salsa,\r\n1 tbsp olive oil,', '20 minutes', '15 minutes', 'tacos.mp4', 'tacos.jpg', '300 kcal', '20 gm', '40 gm', '20 gm', 'taco1.jpg', 'taco2.jpg', 'taco3.jpg', 'taco4.jpg', 14, NULL, '1 : Grill bell peppers and zucchini and other vegetables with olive oil.\r\n2 : Fill tortillas with grilled vegetables and salsa.'),
+(15, 'Guacamole', 'A creamy avocado dip with lime, tomatoes, and cilantro.', '2 ripe avocados,\r\n1 tomato (diced),\r\n1 tbsp lime juice,\r\n1 tbsp cilantro (chopped),\r\n½ tsp salt,', '5 minutes', '5 minutes', 'Guacamole.mp4', 'Guacamole.jpg', '300 kcal', '30 gm', '20 gm', '6 gm', 'g1.jpg', 'g2.jpg', 'g3.jpg', 'g4.jpg', 15, NULL, 'Mash avocados and mix with tomatoes, lemon juice, cilantro, and salt.'),
+(16, 'Enchiladas', 'Corn tortillas filled with beans and vegetables, baked with sauce and cheese.', '4 corn tortillas,\r\n½ cup black beans,\r\n½ cup cheese (shredded),\r\n1 cup enchilada sauce,', '25 minutes', '20 minutes', 'Enchiladas.mp4', 'Enchiladas.jpg', '350 kcal', '30 gm', '30 gm', '25 gm', 'e1.jpg', 'e2.jpg', 'e3.jpg', 'e4.jpg', 16, NULL, '1 : Fill tortillas with beans and cheese.\r\n2 : Roll and bake with enchilada sauce at 375°F (190°C) for 15 minutes.'),
+(17, 'Elote', 'Grilled corn on the cob coated with cheese and spices.\r\n1 : Grill corn until slightly charred.\r\n2 : Brush with mayonnaise and sprinkle cheese and chili powder.', '2 corn cobs,\r\n2 tbsp mayonnaise,\r\n2 tbsp crumbled cheese,\r\n½ tsp chili powder,', '10 minutes', '15 minutes', 'elote.mp4', 'elote.jpg', '300 kcal', '20 gm', '25 gm', '10 gm', 'el1.jpg', 'el2.jpg', 'el3.jpg', 'el4.jpg', 17, NULL, NULL),
+(18, 'Pad Thai', 'Stir-fried rice noodles with tofu, peanuts, and tamarind sauce.', '200g rice noodles,\r\n1 block tofu (cubed),\r\n2 tbsp tamarind paste,\r\n1 tbsp soy sauce,\r\n¼ cup peanuts (crushed),', '20 minutes', '15 minutes', 'Pad Thai.mp4', 'Pad Thai.jpg', '400 kcal', '25 gm', '50 gm', '20 gm', 'padthai1.jpg', 'padthai2.jpg', 'padthai3.jpg', 'padthai4.jpg', 18, NULL, '1 : Stir-fry tofu and set aside.\r\n2 : Cook rice noodles and mix with tamarind paste and soy sauce.\r\n3 : Add tofu and top with peanuts.'),
+(19, 'Green Curry', 'A creamy Thai curry with coconut milk and green curry paste.', '1 cup coconut milk,\r\n 2 tbsp green curry paste,  \r\n ½ cup eggplant (cubed),\r\n ½ cup bell peppers (sliced),  \r\n 1 tbsp soy sauce,', '20 minutes', '15 minutes', 'Green curry.mp4', 'Green curry.jpg', '300 kcal', '30 gm', '30 gm', '8 gm', 'gc1.jpg', 'gc2.jpg', 'gc3.jpg', 'gc4.jpg', 19, NULL, '1 : Heat coconut milk and add green curry paste.  \r\n2 : Add vegetables and soy sauce; cook for 10 minutes.'),
+(20, 'Tom Yum Soup', 'A tangy and spicy Thai soup with mushrooms and lemongrass.', '4 cups vegetable broth,\r\n ½ cup mushrooms (sliced),  \r\n 1 lemongrass stalk (smashed),  \r\n 2 tbsp lime juice,\r\n 1 tsp chili paste,', '20 minutes', '20 minutes', 'tom yum.mp4', 'tom yum.jpg', '100 kcal', '5 gm', '15 gm', '6 gm', 'ty1.jpg', 'ty2.jpg', 'ty3.jpg', 'ty4.jpg', 20, NULL, '1 : Boil broth with lemongrass.  \r\n2 : Add mushrooms, lime juice, and chili paste; cook for 5 minutes.'),
+(21, 'Mango Sticky Rice', 'A sweet Thai dessert made with coconut-infused sticky rice and fresh mango.', '1 cup glutinous rice,  \r\n 1 cup coconut milk,  \r\n 2 tbsp sugar,\r\n 1 ripe mango (sliced),', '10 minutes', '5 minutes', 'mango sticky rice.mp4', 'mango sticky rice.jpg', '100 kcal', '50 gm', '50 gm', '20 gm', 'ms1.jpg', 'ms2.jpg', 'ms3.jpg', 'ms4.jpg', 21, NULL, '1 : Cook sticky rice and mix with coconut milk and sugar.  \r\n2 : Serve with sliced mango.'),
+(24, 'Dosa', 'A thin and crispy crepe made from fermented rice and urad dal (black gram), usually served with chutney and sambar.  \r\n\r\n', '1 cup rice,  \r\n ½ cup urad dal (black gram),  \r\n ¼ tsp fenugreek seeds,  \r\n Salt to taste,  \r\n Water as needed,  \r\n Oil or ghee for cooking,  ', '8 hours', '5 minutes', '', 'd1.jpg', '150 kcal', '5 gm', '25 gm', '3 gm', 'd2.jpg', 'd3.jpg', 'd4.jpg', 'd5.jpg', 22, 1, '1 : Soak rice and urad dal with fenugreek seeds for 6 hours.  \r\n2 : Grind into a smooth batter, add salt, and ferment overnight.  \r\n3 :  Heat a non-stick pan, pour a ladle of batter, and spread it thinly.  \r\n4 :  Drizzle oil around the edges and cook until golden brown.  \r\n5 :  Serve hot with coconut chutney and sambar.  \r\n'),
+(25, 'Idli', 'Soft, fluffy, and steamed rice cakes, often eaten for breakfast with chutney and sambar.  \r\n\r\n', '1 cup rice,  \r\n ½ cup urad dal (black gram),  \r\n ¼ tsp fenugreek seeds,  \r\n Salt to taste,  \r\n Water as needed,  \r\n', '8 hours', '12 minutes', '', 'i1.jpg', '40 kcal', '0.5 gm', '8 gm', '2 gm', 'i2.jpg', 'i3.jpg', NULL, NULL, 23, 1, '1 : Soak rice and urad dal separately for 6 hours.  \r\n2 : Grind to a smooth batter, add salt, and ferment overnight.  \r\n3 : Pour the batter into greased idli molds.  \r\n4 : Steam for 10-12 minutes until cooked.  \r\n5 : Serve hot with chutney and sambar.  '),
+(26, 'Sambar', 'A tangy and spicy stew made with toor dal (pigeon peas), tamarind, vegetables, and South Indian spices.  \r\n\r\n', '½ cup toor dal (pigeon peas),  \r\n 1 small carrot, chopped,  \r\n 1 drumstick (moringa) chopped,  \r\n ½ cup pumpkin, chopped,  \r\n 1 tomato chopped,  \r\n 1 tbsp tamarind paste,  \r\n 1 tsp mustard seeds,  \r\n 1 tsp sambar powder,  \r\n ½ tsp turmeric powder,  \r\n 1 sprig curry leaves,  \r\n 1 tbsp oil,  \r\n 3 cups water,  \r\n Salt to taste,  \r\n', '15 minutes', '30 minutes', '', 's1.jpg', '150 kcal', '5 gm', '20 gm', '6 gm', 's2.jpg', 's3.jpg', 's4.jpg', 's5.jpg', 24, 1, '1 : Pressure cook toor dal with turmeric until soft.  \r\n2 : Heat oil in a pan, add mustard seeds and curry leaves.  \r\n3 : Add chopped vegetables and sauté for a few minutes.  \r\n4 : Add tamarind paste, sambar powder, and cooked dal.  \r\n5 : Simmer for 10 minutes and serve hot with rice or idli.  \r\n'),
+(27, 'Vada', 'Deep-fried, crispy fritters made from urad dal (black gram), flavored with spices and curry leaves.', '1 cup urad dal (black gram),\r\n1 green chili, chopped,\r\n1 small onion, finely chopped,\r\n1 sprig curry leaves, chopped,\r\n½ tsp black pepper (crushed),\r\n½ tsp salt,\r\nOil for frying,', '4 hours', '20 minutes', 'vada.mp4', 'vada1.jpg', '150 kcal', '8 gm', '15 gm', '4 gm', 'vada2.jpg', 'vada3.jpg', 'vada4.jpg', 'vada5.jpg', 25, NULL, '1 : Soak urad dal for 4 hours, then grind into a thick batter.\r\n2 : Mix in chopped onion, green chili, curry leaves, salt, and pepper.\r\n3 : Heat oil in a deep pan.\r\n4 : Shape the batter into small doughnut-like fritters and deep fry until golden brown.\r\n5 : Serve hot with coconut chutney and sambar.'),
+(28, 'French onion soup', 'A rich and savory soup with caramelized onions.', '2 onions (sliced),\r\n 4 cups vegetable broth,  \r\n 2 tbsp butter,  \r\n 1 tsp thyme,  \r\n ½ cup grated cheese (for topping),', '20 minutes', '15 minutes', 'os.mp4', 'os1.jpg', '150 kcal', '50 gm', '50 gm', '15 gm', 'os2.jpg', 'os3.jpg', 'os4.jpg', 'os5.jpg', 26, 5, '1 : Sauté onions in butter until caramelized.  \r\n2 : Add vegetable broth and thyme; simmer for 15 minutes.  \r\n3 : Serve with cheese-topped toast.'),
+(29, 'Tarte tatin', 'A classic upside-down caramelized apple tart.', '4 apples (sliced),  \r\n ½ cup sugar,  \r\n 1 tbsp butter,  \r\n 1 sheet puff pastry,', '20 minutes', '15 minutes', 'tt.mp4', 'tt.jpg', '100 kcal', '20 gm', '50 gm', '16 gm', 'tt2.jpg', 'tt3.jpg', 'tt4.jpg', 'tt5.jpg', 27, NULL, '1 : Caramelize sugar and butter in a pan.  \r\n2 : Add apples and cook for 5 minutes.  \r\n3 : Cover with puff pastry and bake at 375°F (190°C) for 25 minutes.'),
+(30, 'Clafoutis (Fruit Flan)', 'A custard-like baked dessert with fresh berries.', '1 cup milk,  \r\n ½ cup flour,  \r\n¼ cup sugar,  \r\n 1 cup mixed berries,', '20 minutes', '10 minutes', 'c.mp4', 'c1.jpg', '70 kcal', '10 Gm', '20 gm', '50 Gm', 'c2.jpg', 'c3.jpg', 'c4.jpg', 'c5.jpg', 28, NULL, '1. Mix milk, flour, and sugar into a smooth batter.  \r\n2. Pour over berries in a baking dish.  \r\n3. Bake at 375°F (190°C) for 30 minutes.'),
+(31, 'French Potato Gratin', 'A luxurious French classic made with thinly sliced potatoes, cream, garlic, and cheese, baked until bubbling and golden.', '4–5 medium potatoes (about 700g),\r\n2 cloves garlic (minced),\r\n1 cup heavy cream,\r\n1 cup whole milk,\r\n1/2 cup grated Gruyère or Emmental cheese,\r\n2 tbsp butter,\r\nSalt and pepper to taste,\r\n\r\nPinch of nutmeg (optional).', '15 minutes', '40 minutes', 'potato.mp4', 'fp1.jpg', '300 kcal', '20 gm', '26 gm', '8 gm', 'fp2.jpg', 'fp3.jpg', 'fp4.jpg', 'fp5.jpg', 29, NULL, '1 : Peel and thinly slice (about 1/8-inch thick).\r\n2 : Warm milk + cream in a pan with garlic, salt, pepper, and nutmeg, Do not boil.\r\n3 : In a buttered baking dish, layer half the potatoes, Add half the cream and cheese,Repeat.\r\n4 : Cover with foil and bake at 180°C (350°F) for 40 minutes.\r\n5 : Remove foil, bake another 20 minutes until golden.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL,
+  `review_date` date NOT NULL,
+  `review_feedback` varchar(250) NOT NULL,
+  `recipe_id_id` int(11) DEFAULT NULL,
+  `user_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`review_id`, `review_date`, `review_feedback`, `recipe_id_id`, `user_id_id`) VALUES
+(1, '2025-02-16', 'good and delicious\r\n', 3, 1),
+(2, '2025-02-27', 'good', 2, 1),
+(3, '2025-02-28', 'nice', 1, 1),
+(4, '2025-04-13', 'delicious and sweet', 21, 11),
+(5, '2025-04-14', 'tasty', 29, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription`
+--
+
+CREATE TABLE `subscription` (
+  `sub_id` int(11) NOT NULL,
+  `sub_name` varchar(50) NOT NULL,
+  `sub_description` varchar(255) NOT NULL,
+  `sub_price` int(11) NOT NULL,
+  `sub_duration` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `subscription`
+--
+
+INSERT INTO `subscription` (`sub_id`, `sub_name`, `sub_description`, `sub_price`, `sub_duration`) VALUES
+(1, 'Diamond', 'Package', 2000, '4'),
+(2, 'Gold', 'This is gold package', 1500, '3'),
+(3, 'Silver', 'Silver package', 1000, '2'),
+(4, 'Bronze', 'This is package', 500, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_category`
+--
+
+CREATE TABLE `sub_category` (
+  `sub_category_id` int(11) NOT NULL,
+  `sub_category_name` varchar(50) NOT NULL,
+  `description` varchar(250) NOT NULL,
+  `category_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sub_category`
+--
+
+INSERT INTO `sub_category` (`sub_category_id`, `sub_category_name`, `description`, `category_id_id`) VALUES
+(2, 'Pasta', 'A fresh pasta dish loaded with seasonal vegetables and tossed in olive oil.', 1),
+(3, ' Soup', 'A hearty Italian vegetable soup with beans and pasta.  ', 1),
+(4, ' Parmesan', 'A layered dish of breaded eggplant, marinara sauce, and mozzarella cheese.  \r\n\r\n', 1),
+(6, 'Chole', 'A flavorful chickpea curry with a rich tomato-based gravy.', 2),
+(7, 'Rajma', 'A hearty kidney bean curry served with rice.', 2),
+(8, 'Paneer Tikka', 'Spiced, grilled cottage cheese cubes.', 2),
+(9, 'Aloo Paratha', 'A stuffed flatbread with spiced mashed potatoes.', 2),
+(10, 'Fried Rice', 'Stir-fried rice with mixed vegetables, soy sauce, and sesame oil.', 3),
+(11, 'Mapo Tofu', 'A spicy tofu dish in a rich, chili-based sauce.', 3),
+(12, 'Spring Rolls', 'Crispy rolls filled with shredded vegetables.', 3),
+(13, 'Hot and Sour Soup', 'A tangy and spicy soup with chopped vegetables.', 3),
+(14, 'Tacos', 'Soft corn tortillas filled with grilled vegetables and salsa.', 4),
+(15, 'Guacamole', 'A creamy avocado dip with lime, tomatoes, and cilantro.', 4),
+(16, 'Enchiladas', 'Corn tortillas filled with beans and vegetables, baked with sauce and cheese.', 4),
+(17, 'Elote', 'Grilled corn on the cob coated with cheese and spices.', 4),
+(18, 'Pad Thai', 'Stir-fried rice noodles with tofu, peanuts, and tamarind sauce.', 5),
+(19, 'Green Curry with Vegetables', 'A creamy Thai curry with coconut milk and green curry paste.', 5),
+(20, 'Tom Yum Soup', 'A tangy and spicy Thai soup with mushrooms and lemongrass.', 5),
+(21, 'Mango Sticky Rice', 'A sweet Thai dessert made with coconut-infused sticky rice and fresh mango.', 5),
+(22, 'Dosa', 'A thin and crispy crepe made from fermented rice and urad dal (black gram), usually served with chutney and sambar.', 6),
+(23, 'Idli', 'Soft, fluffy, and steamed rice cakes, often eaten for breakfast with chutney and sambar.', 6),
+(24, 'Sambar', 'A tangy and spicy stew made with toor dal (pigeon peas), tamarind, vegetables, and South Indian spices.', 6),
+(25, 'Vada', 'Deep-fried, crispy fritters made from urad dal (black gram), flavored with spices and curry leaves.', 6),
+(26, 'French Onion Soup', 'A rich and savory soup with caramelized onions.', 7),
+(27, 'Tarte Tatin', 'A classic upside-down caramelized apple tart.', 7),
+(28, 'Clafoutis', 'A custard-like baked dessert with fresh berries.', 7),
+(29, 'French Potato Gratin', 'Gratin Dauphinois is a creamy, cheesy potato casserole from south-eastern France. Thinly sliced potatoes are layered and baked in cream and milk, infused with garlic, and topped with golden, bubbling cheese.', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `user_contact` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(15) NOT NULL,
+  `is_admin` int(11) DEFAULT NULL,
+  `otp` varchar(8) DEFAULT NULL,
+  `otp_used` int(11) DEFAULT NULL,
+  `sub_start_date` date DEFAULT NULL,
+  `expire_date` date DEFAULT NULL,
+  `profile_pic` varchar(100) DEFAULT NULL,
+  `area_id_id` int(11) DEFAULT NULL,
+  `sub_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_name`, `user_contact`, `email`, `password`, `is_admin`, `otp`, `otp_used`, `sub_start_date`, `expire_date`, `profile_pic`, `area_id_id`, `sub_id_id`) VALUES
+(1, 'saumya', '8965471235', 'saumyajain1712@gmail.com', '12345678', 0, '8724', 0, '2025-02-18', '2025-04-19', 'dummy.jpg', 2, 3),
+(2, 'diya', '9874563256', 'diya@gmail.com', '789789789', 0, NULL, NULL, '2025-02-14', '2025-04-18', 'dummy.webp', 1, 2),
+(3, 'riya', '7865214596', 'riyashah042008@gmail.com', '987987987', 0, NULL, NULL, '2025-02-15', '2025-02-15', 'dummy3.webp', 2, 3),
+(4, 'priya', '8547963214', 'priya12@gmail.com', '123', 0, NULL, NULL, '2025-02-13', '2025-03-14', 'dummy4.png', 3, 3),
+(5, 'nidhi', '8745963214', 'nidhivaghela235@gmail.com', '741', 0, NULL, NULL, '2025-02-14', '2025-03-13', 'dummy5.jpg', 5, 4),
+(6, 'mahi', '9658741235', 'mahi45@gmail.com', '321', 0, NULL, NULL, '2025-02-13', '2025-03-14', 'dummy6.webp', 4, 2),
+(7, 'heer', '7458963254', 'heer890@gmail.com', '963', 0, NULL, NULL, '2025-02-14', '2025-03-14', 'dummy7.webp', 2, 2),
+(8, 'yuvika', '7458963254', 'yv23@gmail.com', '987', 0, NULL, NULL, '2025-02-13', '2025-04-13', 'dummy8.jpg', 3, 2),
+(11, 'ankit', '8965471235', 'ankit78@gmail.com', '123', NULL, NULL, NULL, '2025-04-13', '2025-05-13', 'dummy9.jpg', 2, 4),
+(12, 'gaurav', '8585698547', 'gk23@gmail.com', '12345678', NULL, NULL, NULL, '2025-04-14', '2025-06-13', 'dummy10.png', 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `wishlist_id` int(11) NOT NULL,
+  `wishlist_date` date NOT NULL,
+  `recipe_id_id` int(11) DEFAULT NULL,
+  `user_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`wishlist_id`, `wishlist_date`, `recipe_id_id`, `user_id_id`) VALUES
+(2, '2025-02-16', 2, 1),
+(3, '2025-02-16', 1, 1),
+(4, '2025-02-17', 3, 1),
+(7, '2025-04-13', 21, 11),
+(8, '2025-04-14', 4, 1),
+(9, '2025-04-14', 26, 1),
+(10, '2025-04-14', 28, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `area`
+--
+ALTER TABLE `area`
+  ADD PRIMARY KEY (`area_id`);
+
+--
+-- Indexes for table `auth_group`
+--
+ALTER TABLE `auth_group`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
+
+--
+-- Indexes for table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
+
+--
+-- Indexes for table `auth_user`
+--
+ALTER TABLE `auth_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  ADD KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`);
+
+--
+-- Indexes for table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `cart_product_id_id_ad4479a7_fk_product_product_id` (`product_id_id`),
+  ADD KEY `cart_user_id_id_aeb465f1_fk_user_user_id` (`user_id_id`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  ADD KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`);
+
+--
+-- Indexes for table `django_content_type`
+--
+ALTER TABLE `django_content_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
+
+--
+-- Indexes for table `django_migrations`
+--
+ALTER TABLE `django_migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `django_session`
+--
+ALTER TABLE `django_session`
+  ADD PRIMARY KEY (`session_key`),
+  ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
+
+--
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `order_user_id_id_37d918b3_fk_user_user_id` (`user_id_id`);
+
+--
+-- Indexes for table `order_item`
+--
+ALTER TABLE `order_item`
+  ADD PRIMARY KEY (`order_item_id`),
+  ADD KEY `order_item_order_id_id_48324a19_fk_order_order_id` (`order_id_id`),
+  ADD KEY `order_item_product_id_id_aeb88c86_fk_product_product_id` (`product_id_id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `recipe`
+--
+ALTER TABLE `recipe`
+  ADD PRIMARY KEY (`recipe_id`),
+  ADD KEY `recipe_user_id_id_e9440d84_fk_user_user_id` (`user_id_id`),
+  ADD KEY `recipe_sub_category_id_id_155ccdc7_fk_sub_categ` (`sub_category_id_id`);
+
+--
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `review_recipe_id_id_ab123f26_fk_recipe_recipe_id` (`recipe_id_id`),
+  ADD KEY `review_user_id_id_89cc04e5_fk_user_user_id` (`user_id_id`);
+
+--
+-- Indexes for table `subscription`
+--
+ALTER TABLE `subscription`
+  ADD PRIMARY KEY (`sub_id`);
+
+--
+-- Indexes for table `sub_category`
+--
+ALTER TABLE `sub_category`
+  ADD PRIMARY KEY (`sub_category_id`),
+  ADD KEY `sub_category_category_id_id_88045227_fk_category_category_id` (`category_id_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `user_area_id_id_aa9c1ac8_fk_area_area_id` (`area_id_id`),
+  ADD KEY `user_sub_id_id_828fb40d_fk_subscription_sub_id` (`sub_id_id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`wishlist_id`),
+  ADD KEY `wishlist_recipe_id_id_fdd9f758_fk_recipe_recipe_id` (`recipe_id_id`),
+  ADD KEY `wishlist_user_id_id_7eb4cb83_fk_user_user_id` (`user_id_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `area`
+--
+ALTER TABLE `area`
+  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `auth_group`
+--
+ALTER TABLE `auth_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
+-- AUTO_INCREMENT for table `auth_user`
+--
+ALTER TABLE `auth_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `django_content_type`
+--
+ALTER TABLE `django_content_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `django_migrations`
+--
+ALTER TABLE `django_migrations`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `order_item`
+--
+ALTER TABLE `order_item`
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `recipe`
+--
+ALTER TABLE `recipe`
+  MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `subscription`
+--
+ALTER TABLE `subscription`
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `sub_category`
+--
+ALTER TABLE `sub_category`
+  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
+
+--
+-- Constraints for table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
+
+--
+-- Constraints for table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  ADD CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  ADD CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Constraints for table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_product_id_id_ad4479a7_fk_product_product_id` FOREIGN KEY (`product_id_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `cart_user_id_id_aeb465f1_fk_user_user_id` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Constraints for table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_user_id_id_37d918b3_fk_user_user_id` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `order_item`
+--
+ALTER TABLE `order_item`
+  ADD CONSTRAINT `order_item_order_id_id_48324a19_fk_order_order_id` FOREIGN KEY (`order_id_id`) REFERENCES `order` (`order_id`),
+  ADD CONSTRAINT `order_item_product_id_id_aeb88c86_fk_product_product_id` FOREIGN KEY (`product_id_id`) REFERENCES `product` (`product_id`);
+
+--
+-- Constraints for table `recipe`
+--
+ALTER TABLE `recipe`
+  ADD CONSTRAINT `recipe_sub_category_id_id_155ccdc7_fk_sub_categ` FOREIGN KEY (`sub_category_id_id`) REFERENCES `sub_category` (`sub_category_id`),
+  ADD CONSTRAINT `recipe_user_id_id_e9440d84_fk_user_user_id` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_recipe_id_id_ab123f26_fk_recipe_recipe_id` FOREIGN KEY (`recipe_id_id`) REFERENCES `recipe` (`recipe_id`),
+  ADD CONSTRAINT `review_user_id_id_89cc04e5_fk_user_user_id` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `sub_category`
+--
+ALTER TABLE `sub_category`
+  ADD CONSTRAINT `sub_category_category_id_id_88045227_fk_category_category_id` FOREIGN KEY (`category_id_id`) REFERENCES `category` (`category_id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_area_id_id_aa9c1ac8_fk_area_area_id` FOREIGN KEY (`area_id_id`) REFERENCES `area` (`area_id`),
+  ADD CONSTRAINT `user_sub_id_id_828fb40d_fk_subscription_sub_id` FOREIGN KEY (`sub_id_id`) REFERENCES `subscription` (`sub_id`);
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_recipe_id_id_fdd9f758_fk_recipe_recipe_id` FOREIGN KEY (`recipe_id_id`) REFERENCES `recipe` (`recipe_id`),
+  ADD CONSTRAINT `wishlist_user_id_id_7eb4cb83_fk_user_user_id` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`user_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

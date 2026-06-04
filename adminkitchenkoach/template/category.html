@@ -1,0 +1,54 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+				
+				<h6 class="mb-0 text-uppercase">Category Table</h6>
+				<h3 align="right"><a href="/inscat/">Insert</a></h3>
+				<hr/>
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="example2" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Category ID</th>
+										<th>Name</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for data in category %}
+									<tr>
+										<td>{{data.category_id}}</td>
+										<td>{{data.category_name}}</td>
+										<td colspan="2">
+											<a href="/delete_category/{{data.category_id}}">
+												<img alt="delete logo" 
+												src="{% static 'assets\trash.png' %}"
+												type="image/png" width="20px" height="20px">
+											</a>
+											<a href="/updatecat/{{data.category_id}}">
+												<img alt="update logo" 
+												src="{% static 'assets/update.png' %}"
+												type="image/png" width="20px" height="20px">
+											</a>
+										</td>
+									</tr>
+									{% endfor %}
+									
+								</tbody>
+								<tfoot>
+
+								</tfoot>
+							</table>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end page wrapper -->
+{% endblock %}

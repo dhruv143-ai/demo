@@ -1,0 +1,101 @@
+{% load static %}
+<div class="tab-pane fade show active" id="food1" role="tabpanel" aria-labelledby="food1-tab">
+  <div class="row" id="response">
+    {% for data in product %}
+    <div class="col-xl-3 col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+      <div class="single-dishes">
+        <div class="dish-img">
+          <img src="/static/assets/images/product_image/{{data.product_image}}" style="width: inherit"
+            alt="{{data.product_name}}" style="height: 100px" />
+        </div>
+        <div class="dish-content">
+          <h5>
+            <a href="/client/single_shop/{{data.product_id}}"
+              value="{{data.product_id}}">{{data.product_name}}</a>
+          </h5>
+          <p>{{data.product_desc|slice:":100"}}</p>
+          {% if request.session.subscription %}
+          <span class="price badge-color">
+            price : Rs{{data.product_price}} 10% discount
+          </span>
+          {% else %}
+          <span class="price">price : {{data.product_price}} Rs</span>
+          {% endif %}
+        </div>
+        <div class="cart-opt">
+          <!-- <span>
+            <a href="#"><i class="fas fa-heart"></i></a>
+          </span> -->
+          <!-- <form method="POST" action="/client/shopping_cart/">
+            {% csrf_token %}
+            <span>
+              <input
+                type="hidden"
+                name="p_id"
+                value="{{data.product_id}}"
+              />
+              <button
+                type="submit"
+                href="/client/shopping_cart/{{data.product_id}}"
+                style="
+                  background-color: transparent;
+                  border: none;
+                  color: inherit;
+                  cursor: pointer;
+                  padding: 0;
+                  font: inherit;
+                  text-decoration: none;
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <i
+                  class="fas fa-shopping-basket"
+                  style="
+                    padding-right: 5px;
+                    padding-left: 5px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    color: #fefafa;
+                    font-size: 1.5em;
+                  "
+                ></i>
+              </button>
+            </span>
+          </form> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- pagination-area -->
+<div class="pagination" style="margin-left: 40%;">
+<div class="container">
+<div class="pagination">
+  <ul class="pagination" style="display: flex;">
+    {% if product.has_previous %}
+    <li><a href="?page={{ product.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+
+    {% for i in product.paginator.page_range %}
+    {% if product.number == i %}
+    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if product.has_next %}
+    <li><a href="?page={{ product.next_page_number }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+</div>
+</div>
+</div>

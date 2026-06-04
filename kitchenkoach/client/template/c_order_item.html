@@ -1,0 +1,79 @@
+{% extends "c_header.html" %}
+{% block content %}
+{% load static %}
+    <!-- breadcrumb-area -->
+
+    <div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+      <div class="bread-shapes">
+        <span class="b-shape-1 item-bounce"
+          ><img src="{% static 'assets/images/img/5.png' %}" alt=""
+        /></span>
+
+        <span class="b-shape-2"
+          ><img src="{% static 'assets/images/img/6.png' %}" alt=""
+        /></span>
+
+        <span class="b-shape-3"
+          ><img src="{% static 'assets/images/img/7.png' %}" alt=""
+        /></span>
+
+        <span class="b-shape-4"
+          ><img src="{% static 'assets/images/img/9.png' %}" alt=""
+        /></span>
+
+        <span class="b-shape-5"
+          ><img src="{% static 'assets/images/shapes/18.png' %}" alt=""
+        /></span>
+
+        <span class="b-shape-6 item-animateOne"
+          ><img src="{% static 'assets/images/img/7.png' %}" alt=""
+        /></span>
+      </div>
+
+      <div class="container padding-top-120">
+        <div class="row justify-content-center">
+          <nav aria-label="breadcrumb">
+            <h2 class="page-title">Order Items Page</h2>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- wishlist-area -->
+
+    <section class="wishlist-area padding-top-120 padding-bottom-120">
+      <div class="container">
+        <h3 class="text-center margin-bottom-30">Order Items</h3>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <!-- <th>Order ID</th> -->
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in c_order_item %}
+                <tr>	
+                    <td>{{data.order_item_id}}</td>
+                    <!-- <td>{{data.order_id}}</td> -->
+                    <td>{{data.product_id.product_name}}</td>
+                    <td>{{data.order_item_qty}}</td>
+                    <td>{{data.order_item_price}}</td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+
+            
+          </table>
+        </div>
+
+        
+      </div>
+    </section>
+{% endblock %}

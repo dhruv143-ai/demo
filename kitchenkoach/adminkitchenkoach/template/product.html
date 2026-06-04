@@ -1,0 +1,62 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+				
+				<h6 class="mb-0 text-uppercase">Product Table</h6>
+				<h3 align="right"><a href="/insproduct/">Insert</a></h3>
+
+				<hr/>
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="example2" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Product ID</th>
+										<th>Name</th>
+										<th>Description</th>
+                                        <th>Weight</th>
+                                        <th>Price</th>
+                                        <th>Image</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for data in product %}
+									<tr>
+										<td>{{data.product_id}}</td>
+										<td>{{data.product_name}}</td>
+										<td>{{data.product_desc}}</td>
+                                        <td>{{data.product_weight}}</td>
+                                        <td>{{data.product_price}}</td>
+										<td> <img src="/static/assets/images/product_image/{{data.product_image}}" alt="img-gallery" style="height:40px;width:40px"></td>
+                                        <td colspan="2">
+											<a href="/delete_product/{{data.product_id}}">
+												<img alt="delete logo" 
+												src="{% static 'assets\trash.png' %}"
+												type="image/png" width="20px" height="20px">
+											</a>
+											<a href="/updateproduct/{{data.product_id}}">
+												<img alt="update logo" 
+												src="{% static 'assets/update.png' %}"
+												type="image/png" width="20px" height="20px">
+											</a>
+										</td>
+									</tr>
+									{% endfor %}
+									
+								</tbody>
+								<tfoot>
+
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end page wrapper -->
+{% endblock %}

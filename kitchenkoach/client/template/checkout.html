@@ -1,0 +1,263 @@
+<script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous">
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.js"></script>
+
+<style>
+.parsley-errors-list {
+    color: red;
+}
+</style>
+
+<script>
+  $(document).ready(function() {
+      // Prevent alphabet input in contact number field
+      $('input[name="contact"]').on('keypress', function(e) {
+          if (e.which < 48 || e.which > 57) {
+              e.preventDefault();
+          }
+      });
+  });
+</script>
+
+{% extends 'c_header.html' %} {% load static %} {% block content %} 
+{% load mathfilters %}
+
+<!-- breadcrumb-area -->
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+  <div class="bread-shapes">
+    <span class="b-shape-1 item-bounce"
+      ><img src="{% static 'assets/images/img/5.png' %}" alt=""
+    /></span>
+    <span class="b-shape-2"
+      ><img src="{% static 'assets/images/img/6.png' %}" alt=""
+    /></span>
+    <span class="b-shape-3"
+      ><img src="{% static 'assets/images/img/7.png' %}" alt=""
+    /></span>
+    <span class="b-shape-4"
+      ><img src="{% static 'assets/images/img/9.png' %}" alt=""
+    /></span>
+    <span class="b-shape-5"
+      ><img src="{% static 'assets/images/shapes/18.png' %}" alt=""
+    /></span>
+    <span class="b-shape-6 item-animateOne"
+      ><img src="{% static 'assets/images/img/7.png' %}" alt=""
+    /></span>
+  </div>
+  <div class="container padding-top-120">
+    <div class="row justify-content-center">
+      
+      <nav aria-label="breadcrumb">
+        <h2 class="page-title">Checkout</h2>
+       
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- checkout-area -->
+
+<div class="checkout-area padding-top-120 padding-bottom-120">
+  <div class="cshapes">
+    
+    <span class="cs-2 item-bounce"
+      ><img src="{% static 'assets/images/shapes/12.png' %}" alt=""
+    /></span>
+    <span class="cs-3"
+      ><img src="{% static 'assets/images/shapes/13.png' %}" alt=""
+    /></span>
+    <span class="cs-4"
+      ><img src="{% static 'assets/images/shapes/14.png' %}" alt=""
+    /></span>
+    <span class="cs-5"
+      ><img src="{% static 'assets/images/img/32.png' %}" alt=""
+    /></span>
+    <span class="cs-6"
+      ><img src="{% static 'assets/images/shapes/16.png' %}" alt=""
+    /></span>
+  </div>
+  
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-6 wow fadeInUp">
+        <div class="checkout-right">
+          <h4>Your Order</h4>
+          <div class="pricing-box">
+            <ul class="p-head">
+              <li class="uppercase">product image</li>
+              <li class="uppercase">product name</li>
+              <li class="uppercase">total</li>
+            </ul>
+            <div class="divider"></div>
+
+            {% for data in order_item %}
+            <ul>
+              <img src="/static/assets/images/product_image/{{data.product_id.product_image}}" 
+              alt="product_img" 
+              style="height: 100px; width: 90px; border-radius: 50%; margin-top: 10px;"/>
+              <li style="padding: 8%;">{{data.product_id.product_name}}</li>
+              <li style="padding: 7%;">{{data.order_item_price}}</li>
+            </ul><br><br>
+            {% endfor %}
+
+            {% if request.session.subscription %}
+
+            <ul>
+              <h5>Sub Total</h5>
+              <h5>{{order.total_amt}}</h5>
+            </ul>
+
+            <ul class="">
+              <li class="uppercase">discount (10%)</li>
+              <li class="total"><b>-₹{{order.total_amt|mul:0.1}}</b></li>
+            </ul>
+            <ul class="bg-white">
+              <li class="uppercase">total after discount</li>
+              <li class="total"><b>₹{{order.total_amt|mul:0.9}}</b></li>
+            </ul>
+
+            {% else %}
+            <ul>
+              <h5> Total</h5>
+              <h5>{{order.total_amt}}</h5>
+            </ul>
+            {% endif %}
+          </div>
+        <br />
+
+           
+            <input type="hidden" name="sub_id" value="{{data.sub_id}}" />
+            <input
+              type="hidden"
+              name="sub_duration"
+              value="{{data.sub_duration}}"
+            />
+            <!-- <button type="submit" class="btn">Subscribe Now</button> -->
+
+            <input
+              type="hidden"
+              name="name"
+              id="name"
+              required
+              class="form-control mb-4"
+              placeholder="Name"
+            />
+            
+          </div>
+        </div>
+      <div class="col-lg-6 wow fadeInUp">
+        <div class="checkout-left">
+          <h4>Billing Details</h4>
+
+          <form method="post" action="/client/bill_add/" data-parsley-validate>
+            {% csrf_token %}
+            <input type="hidden" name="order_id" value="{{order.order_id}}" />
+          
+            <input
+              type="text"
+              name="street_add"
+              placeholder="Street Address"
+              required
+              data-parsley-required-message="Street address is required"
+            />
+          
+            <select
+              name="area_id"
+              id="address"
+              required
+              data-parsley-required-message="Address is required"
+            >
+              {% for data in area %}
+              <option value="{{data.area_id}}">{{data.area_address}}</option>
+              {% endfor %}
+            </select>
+          
+            <input
+              type="text"
+              name="zip"
+              placeholder="Zip"
+              required
+              data-parsley-type="digits"
+              data-parsley-length="[6,6]"
+              data-parsley-required-message="Zip code is required"
+              data-parsley-type-message="Please enter a valid zip code"
+              data-parsley-length-message="Please enter exactly 6 digits"
+            />
+          
+            <input
+              type="tel"
+              name="contact"
+              placeholder="Phone"
+              data-parsley-type="digits"
+              data-parsley-required-message="Phone number is required"
+              data-parsley-type-message="Please enter a valid phone number"
+              data-parsley-length="[10,10]"
+              data-parsley-length-message="Please enter exactly 10 digits"
+              required
+            />
+          
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+              data-parsley-required-message="Email is required"
+              data-parsley-type-message="Please enter a valid email address"
+            />
+          
+            {% if request.session.subscription %}
+            <script
+              src="https://checkout.razorpay.com/v1/checkout.js"
+              data-key="rzp_test_18nJmtVOwMuu6G"
+              data-amount="{{order.total_amt|mul:90}}"
+              data-currency="INR"
+              data-order_id="{{payment.id}}"
+              data-buttontext="Place Order"
+              data-name="client"
+              data-description="Subscription purchase"
+              data-image="/client_static/assets/images/shop/logo2.png"
+              data-prefill.name="{{ request.user.first_name }}"
+              data-prefill.email="{{ request.user.email }}"
+              data-theme.color="#F37254"
+            ></script>
+            {% else %}
+            <script
+              src="https://checkout.razorpay.com/v1/checkout.js"
+              data-key="rzp_test_18nJmtVOwMuu6G"
+              data-amount="{{order.total_amt|mul:100}}"
+              data-currency="INR"
+              data-order_id="{{payment.id}}"
+              data-buttontext="Place Order"
+              data-name="client"
+              data-description="Subscription purchase"
+              data-image="/client_static/assets/images/shop/logo2.png"
+              data-prefill.name="{{ request.user.first_name }}"
+              data-prefill.email="{{ request.user.email }}"
+              data-theme.color="#F37254"
+            ></script>
+            {% endif %}
+          
+            <style>
+              .razorpay-payment-button {
+                background-color: #b81414 !important;
+                color: #fff !important;
+                padding: 10px 20px !important;
+                font-size: 16px !important;
+                cursor: pointer !important;
+                border-radius: 5px !important;
+              }
+            </style>
+          </form>
+      </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

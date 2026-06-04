@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <!-- Mirrored from html.imjol.com/khadyo/khadyo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 Dec 2024 11:10:04 GMT -->
+  <head>
+    <!-- Required Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Page Title -->
+    <title>Kitchen-Koach</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" href="favicon.png" />
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css '%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/meanmenu.min.css '%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css '%}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/fontawesome.min.css '%}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css '%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css '%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css '%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css '%}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      // Use jQuery to make an AJAX request when the page loads
+      $(document).ready(function () {
+        $.ajax({
+          url: "/client/send_mail/", // The URL mapped to the function in views.py
+          type: "POST",
+          success: function (response) {
+            console.log(response.message); // Log the response from the server
+          },
+          error: function (error) {
+            console.log("Error occurred:", error);
+          },
+        });
+      });
+    </script>
+
+    <script>
+      function load() {
+        $.ajax({
+          url: "/client/client_header_menu/",
+          success: function (data) {
+            $("#menu").html(data);
+          },
+        });
+      }
+    </script>
+  </head>
+
+  <body onload="load()">
+    <!-- Preloader Starts -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-inner">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    </div>
+    <!-- header -->
+    <header>
+      <!-- header-top -->
+      <div class="header-top">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-lg-12 col-md-12 col-12 d-flex flex-wrap justify-content-between"
+            >
+              <div class="contact-box">
+               
+                <span>
+                  <a href="#"
+                    ><i class="fas fa-envelope-open-text"></i>
+                    {{request.session.email}}</a
+                  ></span
+                >
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header-bottom -->
+      <div class="header-bottom margin-top-20">
+        <div class="container position-relative">
+          <div class="row d-flex align-items-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-3">
+              <div class="logo">
+                <a href="/client/index/">
+                  <img
+                    src="/static/assets/images/recipeimage/logo2.jpg/"
+                    alt="logo"
+                    style="width: 200px; border-radius: 50%"
+                /></a>
+              </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+              <nav id="mobile-menu">
+                <ul class="main-menu">
+                  <li>
+                    <a href="/client/index/">Home</a>
+                  </li>
+                  <li>
+                    <a href="/client/recipe/"
+                      >Recipe <span><i class="fas fa-angle-down"></i></span
+                    ></a>
+                    <ul class="submenu" id="menu"></ul>
+                  </li>
+                  {% if request.session.subscription %}
+                  <li>
+                    <a href="/client/u_recipe/">Upload Recipe </a>
+                  </li>
+                  {% else %}
+                  <li>
+                    <a href="/client/c_sub/">Upload Recipe </a>
+                  </li>
+                  {% endif %}
+                  <li><a href="/client/shop/">Shop</a></li>
+
+                  {% if request.session.subscription %}
+
+                  <li><a href="/client/upload_image/">AI Search</a></li>
+                  {% else %}
+                  <li><a href="/client/c_sub/">AI Search</a></li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+            <div class="col-lg-4 col-md-9 col-8">
+              <div class="customer-area">
+                <span>
+                  <a href="/client/wishlist/"><i class="fas fa-heart"></i></a>
+                </span>
+                <span>
+                  <a href="/client/c_profile/"><i class="fas fa-user"></i></a>
+                </span>
+                <span>
+                  <a href="/client/shopping_cart/"
+                    ><i class="fas fa-shopping-basket"></i
+                  ></a>
+                </span>
+
+                {% if request.session.name %}
+                <a href="/client/c_logout/" class="btn">logout</a>
+                {% else %}
+                <a href="/client/c_login/" class="btn">login</a>
+                {% endif %}
+                <br />
+                <br />
+
+                {% if request.session.sub_id %}
+                <h6 style="color: red;">Already Subscribed</h6>
+                {% else %}
+                <a href="/client/c_sub/" class="btn">Subscription</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <!-- mobile-menu -->
+          <div class="mobile-menu"></div>
+        </div>
+      </div>
+    </header>
+
+    {% block content %} {% endblock %}
+    <!-- footer area -->
+    <footer class="padding-top-40 padding-bottom-40">
+      <div class="fo-shapes">
+        <span class="fs-1"
+          ><img src="{% static 'assets/images/gallery/26.png '%}" alt=""
+        /></span>
+        <span class="fs-2 item-bounce"
+          ><img src="{% static 'assets/images/shapes/25.png '%}" alt=""
+        /></span>
+        <span class="fs-3 item-bounce"
+          ><img src="{% static 'assets/images/shapes/26.png '%}" alt=""
+        /></span>
+        <span class="fs-4 item-bounce"
+          ><img src="{% static 'assets/images/shapes/27.png '%}" alt=""
+        /></span>
+        <span class="fs-5 item-animateTwo"
+          ><img src="{% static 'assets/images/shapes/3.png '%}" alt=""
+        /></span>
+        <span class="fs-6"
+          ><img src="{% static 'assets/images/shapes/22.png '%}" alt=""
+        /></span>
+        <span class="fs-7"
+          ><img src="{% static 'assets/images/shapes/30.png '%}" alt=""
+        /></span>
+      </div>
+      <div class="footer-top d-none d-md-block">
+        <div class="container">
+          <div
+            class="row align-items-center justify-content-between padding-bottom-25"
+          >
+            <div class="col-lg-3 col-md-3">
+              <div class="logo">
+                <img
+                  src="/static/assets/images/recipeimage/logo2.jpg/"
+                  alt="logo"
+                  style="width: 200px; border-radius: 50%"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="f-title">
+                <h4 style="color: rgb(140, 0, 0)">
+                  Feeling Hungry! Create Your Favourite Recipe At Home
+                </h4>
+              </div>  
+            </div>
+            <div class="col-lg-2 col-md-3">
+              <a href="/client/shop/" class="btn">order now</a>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <div class="footer-bottom padding-top-22 padding-bottom-30">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
+              <div class="widget">
+                <h6>address</h6>
+                <p>Some where in india</p>
+                <a href="#" class="f-link">view google map</a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
+              <div class="widget">
+                <h6>subscribe</h6>
+                <p>Subscribe to get additional Functionality</p>
+                <a href="#" class="f-link"></a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
+              <!-- <div class="widget">
+                <h6>opening hours</h6>
+                <p>
+                  <span>monday-friday: 8am - 4pm</span> <br /><span
+                    >saturday: 9am - 5pm</span
+                  >
+                </p>
+
+                <a href="#" class="f-link">make a call</a>
+              </div> -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12 margin-bottom-20">
+              <div class="widget">
+                <h6>newsletter</h6>
+                <div class="newsletter d-flex">
+                  <form action="#">
+                    <input type="email" placeholder="enter your email" />
+                    <button type="submit">
+                      <i class="fas fa-paper-plane"></i>
+                    </button>
+                  </form>
+                </div>
+                <a href="#" class="f-link">Subscribe now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright-area text-center">
+        <p>Copyright © 2025 <a href="index.html">Kitchen Koach</a></p>
+      </div>
+    </footer>
+
+    <!-- ToTop Button -->
+    <button class="scrollup"><i class="fas fa-angle-up"></i></button>
+
+    <!-- Javascript Files -->
+    <script src="{% static 'assets/js/vendor/jquery-2.2.4.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/bootstrap.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/jquery.meanmenu.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/jquery.magnific-popup.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/slick.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/counterup.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/countdown.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/waypoints.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-ui.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/isotope.pkgd.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/easing.min.js '%}"></script>
+    <script src="{% static 'assets/js/vendor/wow.min.js '%}"></script>
+    <script src="{% static 'assets/js/main.js '%}"></script>
+  </body>
+
+  <!-- Mirrored from html.imjol.com/khadyo/khadyo/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 Dec 2024 11:10:30 GMT -->
+</html>

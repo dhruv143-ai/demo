@@ -1,0 +1,53 @@
+{% extends 'header.html' %}
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+				 
+				<h6 class="mb-0 text-uppercase">DataTable Import</h6>
+				
+				<hr/>
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="example2" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>User ID</th>
+										<th>Name</th>
+										<th>Contact</th>
+										<th>Email</th>
+										<th>Subscription Name</th>
+										<th>Area Address</th>
+										<th>Subscription Start Date</th>
+										<th>Subscription Expire</th>
+										<th>Profile Pic</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for data in user %}
+									<tr>
+										<td>{{data.user_id}}</td>
+										<td>{{data.user_name}}</td>
+										<td>{{data.user_contact}}</td>
+										<td>{{data.email}}</td>
+										<td>{{data.sub_id.sub_name}}</td>
+										<td>{{data.area_id.area_address}}</td>
+										<td>{{data.sub_start_date}}</td>
+										<td>{{data.expire_date	}}</td>
+										<td>{{data.profile_pic}}</td>
+									</tr>
+									{% endfor %}
+								
+								</tbody>
+								<tfoot>
+
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end page wrapper -->
+{% endblock %}

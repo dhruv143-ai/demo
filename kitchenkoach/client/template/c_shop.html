@@ -1,0 +1,211 @@
+{% extends "c_header.html" %} {% block content %} {% load static %}
+
+<!-- breadcrumb-area -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+      $(document).ready(function () {
+        $("#sort_product").change(function () {
+          var selectedValue = $(this).val();
+         
+          if (selectedValue) {
+            $.ajax({
+              url: "/client/sort/", // URL to the Django view
+              type: "POST",
+              data: {
+                value: selectedValue,
+              },
+              success: function (response) {
+                $("#nav-tabContent-1").html(response);
+              },
+            });
+          }
+        });
+      });
+    </script>
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+  <div class="bread-shapes">
+    <span class="b-shape-1"><img src="{% static 'assets/images/img/5.png' %}" alt="" /></span>
+    <span class="b-shape-2"><img src="{% static 'assets/images/img/6.png' %}" alt="" /></span>
+    <span class="b-shape-3"><img src="{% static 'assets/images/img/7.png' %}" alt="" /></span>
+    <span class="b-shape-4"><img src="{% static 'assets/images/img/9.png' %}" alt="" /></span>
+    <span class="b-shape-5"><img src="{% static 'assets/images/shapes/18.png' %}" alt="" /></span>
+    <span class="b-shape-6"><img src="{% static 'assets/images/img/7.png' %}" alt="" /></span>
+  </div>
+  <div class="container padding-top-120">
+    <div class="row justify-content-center">
+      <nav aria-label="breadcrumb">
+        <h2 class="page-title">food shop</h2>
+        <!-- <ol class="breadcrumb text-center">
+          <li class="breadcrumb-item">
+            <a href="#">Home</a> / <a href="#"> page</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">food shop</li>
+        </ol> -->
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- food-area-wrapper -->
+<div class="food-area-wrapper">
+  <div class="pshapes">
+    <span class="ps-1 item-bounce"><img src="{% static 'assets/images/img/32.png' %}" alt="" /></span>
+    <span class="ps-2 item-animateTwo"><img src="{% static 'assets/images/shapes/12.png' %}" alt="" /></span>
+    <span class="ps3 item-bounce"><img src="{% static 'assets/images/shapes/13.png' %}" alt="" /></span>
+    <span class="ps-4"><img src="{% static 'assets/images/shapes/14.png' %}" alt="" /></span>
+    <span class="ps-5"><img src="{% static 'assets/images/img/6.png' %}" alt="" /></span>
+    <span class="ps-6"><img src="{% static 'assets/images/shapes/16.png' %}" alt="" /></span>
+    <span class="ps-7 item-animateOne"><img src="{% static 'assets/images/img/6.png' %}" alt="" /></span>
+  </div>
+  <div class="container padding-top-120 padding-bottom-120">
+    <div class="row">
+      <div class="col-lg-3 col-md-4">
+        <!-- sidebar-widget-1 -->
+        <div class="sidebar-widget-1 wow fadeInUp">
+          <h5>Latest Products</h5>
+          {% for data in hp %}
+          <div class="sidebar-widget d-flex">
+            <div class="dish-img">
+              <a href="single-food.html"><img src="/static/assets/images/product_image/{{data.product_image}}" alt="" /></a>
+            </div>
+            <div class="dish-content">
+              <h6><a href="/client/single_shop/{{data.product_id}}">{{data.product_name}}</a></h6>
+              <span class="price">{{data.product_price}} Rs</span>
+             
+            </div>
+          </div>
+          {% endfor %}
+         </div>
+
+       
+      </div>
+      <div class="col-lg-9 col-md-8">
+        <!-- food area -->
+        <section class="food-area popular-dishes-area">
+          <div class="container">
+            <nav class="popular-tab-nav d-flex flex-wrap justify-content-between align-items-center margin-bottom-60">
+              <ul class="nav" id="nav-tab-1" role="tablist">
+                <!-- <li class="nav-item" role="presentation">
+                  <div class="nav-link active" id="food1-tab" data-bs-toggle="tab" data-bs-target="#food1" role="tab"
+                    aria-controls="food1" aria-selected="true">
+                    <span><i class="fas fa-th"></i></span>
+                  </div> -->
+                </li>
+              </ul>
+              
+              <div class="sorting-area">
+                <span class="margin-right-20" id="dropdown">sort by :</span>
+                <span>
+                  <select name="sort_product" id="sort_product">
+                    <option value="name">A to Z</option>
+                    <option value="asc">Low to high</option>
+                    <option value="desc">High to low</option>
+                  </select>
+                </span>
+              </div>
+            </nav>
+            <!-- main-content -->
+            <div class="tab-content" id="nav-tabContent-1">
+             
+              
+              <div class="tab-pane fade show active" id="food1" role="tabpanel" aria-labelledby="food1-tab">
+                <div class="row" id="response">
+                  {% for data in product %}
+                  <div class="col-xl-3 col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+                    <div class="single-dishes">
+                      <div class="dish-img">
+                        <img src="/static/assets/images/product_image/{{data.product_image}}" 
+                          alt="{{data.product_name}}" style="height:110px; width:110px;" />
+                      </div>
+                      <div class="dish-content">
+                        <h5>
+                          <a href="/client/single_shop/{{data.product_id}}"
+                            value="{{data.product_id}}">{{data.product_name}}</a>
+                        </h5>
+                        <p>{{data.product_desc|slice:":100"}}</p>
+                        {% if request.session.subscription %}
+                        <span class="price badge-color">
+                          price : Rs{{data.product_price}} 10% discount
+                        </span>
+                        {% else %}
+                        <span class="price">price : {{data.product_price}} Rs</span>
+                        {% endif %}
+                      </div>
+                      
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            
+          <!-- pagination-area -->
+          <div class="pagination" style="margin-left: 40%;">
+            <div class="container">
+              <div class="pagination">
+                <ul class="pagination" style="display: flex;">
+                  {% if product.has_previous %}
+                  <li><a href="?page={{ product.previous_page_number }}">&laquo;</a></li>
+                  {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                  {% endif %}
+
+                  {% for i in product.paginator.page_range %}
+                  {% if product.number == i %}
+                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+
+                  {% if product.has_next %}
+                  <li><a href="?page={{ product.next_page_number }}">&raquo;</a></li>
+                  {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+
+            </div>
+          </div>
+
+          <!-- pagination-area -->
+          <!-- <div class="pagination" style="margin-left: 40%;">
+            <div class="container">
+              <div class="pagination">
+                <ul class="pagination" style="display: flex;">
+                  {% if product.has_previous %}
+                  <li><a href="?page={{ product.previous_page_number }}">&laquo;</a></li>
+                  {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                  {% endif %}
+
+                  {% for i in product.paginator.page_range %}
+                  {% if product.number == i %}
+                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+
+                  {% if product.has_next %}
+                  <li><a href="?page={{ product.next_page_number }}">&raquo;</a></li>
+                  {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div> -->
+
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

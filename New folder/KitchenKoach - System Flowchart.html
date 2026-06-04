@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<!-- saved from url=(0159)https://dede3phc22dgx.cloudfront.net/thread_output/90f332d1-0870-45eb-81a5-4d8ae10d086a/a8316330-a021-70b4-d17c-598a0d854895/kitchenkoach_system_flowchart.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KitchenKoach - System Flowchart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #2c3e50;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .project-info {
+            color: #495057;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .system-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .module-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .module-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Flowchart Shapes */
+        .oval {
+            background: #34495e;
+            color: white;
+            padding: 18px 50px;
+            border-radius: 100px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            min-width: 180px;
+            border: 3px solid #2c3e50;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        .rectangle {
+            background: white;
+            color: #2c3e50;
+            padding: 18px 35px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            border: 3px solid #3498db;
+            min-width: 250px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .rectangle:hover {
+            background: #ebf5fb;
+            transform: scale(1.02);
+        }
+
+        .diamond {
+            background: white;
+            color: #2c3e50;
+            padding: 35px;
+            transform: rotate(45deg);
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            border: 3px solid #e74c3c;
+            width: 170px;
+            height: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            margin: 10px 0;
+        }
+
+        .diamond-text {
+            transform: rotate(-45deg);
+            max-width: 110px;
+            line-height: 1.4;
+        }
+
+        .arrow {
+            width: 3px;
+            height: 35px;
+            background: #495057;
+            position: relative;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 10px solid #495057;
+        }
+
+        .decision-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .branch-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        .label {
+            font-weight: 700;
+            color: white;
+            font-size: 13px;
+            background: #e74c3c;
+            padding: 6px 14px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .label.yes {
+            background: #27ae60;
+        }
+
+        .label.no {
+            background: #e74c3c;
+        }
+
+        .error-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .error-box {
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            border: 2px solid #ffc107;
+            min-width: 200px;
+        }
+
+        .back-arrow {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #dee2e6, transparent);
+            margin: 30px 0;
+        }
+
+        .legend {
+            margin-top: 50px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .legend-items {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-shape {
+            width: 50px;
+            height: 30px;
+            border: 2px solid #2c3e50;
+        }
+
+        .legend-shape.oval {
+            border-radius: 50px;
+            background: #34495e;
+        }
+
+        .legend-shape.rectangle {
+            border-radius: 4px;
+            background: white;
+            border-color: #3498db;
+        }
+
+        .legend-shape.diamond {
+            width: 30px;
+            height: 30px;
+            transform: rotate(45deg);
+            background: white;
+            border-color: #e74c3c;
+        }
+
+        .legend-label {
+            font-size: 13px;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1200px) {
+            .system-container {
+                grid-template-columns: 1fr;
+                gap: 80px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>KitchenKoach System Flowchart</h1>
+            <p class="subtitle">Complete System Architecture</p>
+            <p class="project-info">Academic Project Documentation</p>
+        </div>
+
+        <div class="system-container">
+            <!-- ADMIN MODULE -->
+            <div class="module-section">
+                <div class="module-header">ADMIN MODULE</div>
+
+                <div class="flowchart">
+                    <!-- Start -->
+                    <div class="oval">START</div>
+                    <div class="arrow"></div>
+
+                    <!-- Admin Login -->
+                    <div class="rectangle">Admin Login</div>
+                    <div class="arrow"></div>
+
+                    <!-- Validate Login Decision -->
+                    <div class="diamond">
+                        <div class="diamond-text">Validate Login</div>
+                    </div>
+
+                    <!-- Decision Labels -->
+                    <div class="branch-labels">
+                        <div class="label no">NO</div>
+                        <div class="label yes">YES</div>
+                    </div>
+
+                    <!-- Error Flow -->
+                    <div class="error-flow">
+                        <div class="error-box">Invalid Credentials</div>
+                        <div class="back-arrow">↻ Return to Login</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Success Flow -->
+                    <div class="rectangle">Dashboard</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Manage Categories</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Manage Recipes</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Manage Products</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">View Reports</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Logout</div>
+                    <div class="arrow"></div>
+
+                    <!-- End -->
+                    <div class="oval">END</div>
+                </div>
+            </div>
+
+            <!-- USER MODULE -->
+            <div class="module-section">
+                <div class="module-header">USER MODULE</div>
+
+                <div class="flowchart">
+                    <!-- Start -->
+                    <div class="oval">START</div>
+                    <div class="arrow"></div>
+
+                    <!-- Register/Login -->
+                    <div class="rectangle">Register / Login</div>
+                    <div class="arrow"></div>
+
+                    <!-- Validate Login Decision -->
+                    <div class="diamond">
+                        <div class="diamond-text">Validate Login</div>
+                    </div>
+
+                    <!-- Decision Labels -->
+                    <div class="branch-labels">
+                        <div class="label no">NO</div>
+                        <div class="label yes">YES</div>
+                    </div>
+
+                    <!-- Error Flow -->
+                    <div class="error-flow">
+                        <div class="error-box">Invalid Credentials</div>
+                        <div class="back-arrow">↻ Return to Login</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Success Flow -->
+                    <div class="rectangle">Home Page</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Browse Recipes</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Subscribe Plan</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Add to Cart</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Place Order</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Write Review</div>
+                    <div class="arrow"></div>
+
+                    <div class="rectangle">Logout</div>
+                    <div class="arrow"></div>
+
+                    <!-- End -->
+                    <div class="oval">END</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">FLOWCHART SYMBOLS LEGEND</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-shape oval"></div>
+                    <span class="legend-label">Start / End</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-shape rectangle"></div>
+                    <span class="legend-label">Process</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-shape diamond"></div>
+                    <span class="legend-label">Decision</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body></html>

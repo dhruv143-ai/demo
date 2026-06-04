@@ -1,0 +1,222 @@
+{% extends "c_header.html" %} {% block content %} {% load static %}
+
+<!-- breadcrumb-area -->
+
+<script>
+  $(function() {
+      $("#recipeSearch").autocomplete({
+          source: "{% url 'autosuggest' %}",
+          minLength: 1
+      });
+  });
+</script>
+
+<style>
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .search-container input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+  }
+
+  .search-container button {
+    padding: 10px 20px;
+    border: 2px solid #030709;
+    border-left: none;
+    background-color: #ff2626b5;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .search-container button:hover {
+    background-color: #680505;
+  }
+</style>
+
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+  <div class="bread-shapes">
+    <span class="b-shape-1 item-bounce"
+      ><img src="{% static 'assets/images/img/5.png '%}" alt=""
+    /></span>
+    <span class="b-shape-2"
+      ><img src="{% static 'assets/images/img/6.png '%}" alt=""
+    /></span>
+    <span class="b-shape-3"
+      ><img src="{% static 'assets/images/img/7.png '%}" alt=""
+    /></span>
+    <span class="b-shape-4"
+      ><img src="{% static 'assets/images/img/9.png '%}" alt=""
+    /></span>
+    <span class="b-shape-5"
+      ><img src="{% static 'assets/images/shapes/18.png '%}" alt=""
+    /></span>
+    <span class="b-shape-6 item-animateOne"
+      ><img src="{% static 'assets/images/img/7.png '%}" alt=""
+    /></span>
+  </div>
+  <div class="container padding-top-120">
+    <div class="row justify-content-center">
+      <nav aria-label="breadcrumb">
+        <h2 class="page-title">recipe page</h2>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- food area -->
+<section
+  class="food-area popular-dishes-area padding-top-110 padding-bottom-110"
+>
+  <div class="pshapes">
+    <span class="ps-1"
+      ><img src="{% static 'assets/images/img/32.png '%}" alt=""
+    /></span>
+    <span class="ps-2 item-animateOne"
+      ><img src="{% static 'assets/images/shapes/12.png '%}" alt=""
+    /></span>
+    <span class="ps3 item-bounce"
+      ><img src="{% static 'assets/images/shapes/13.png '%}" alt=""
+    /></span>
+    <span class="ps-4"
+      ><img src="{% static 'assets/images/shapes/14.png '%}" alt=""
+    /></span>
+    <span class="ps-5"
+      ><img src="{% static 'assets/images/img/6.png '%}" alt=""
+    /></span>
+    <span class="ps-6"
+      ><img src="{% static 'assets/images/shapes/16.png '%}" alt=""
+    /></span>
+    <span class="ps-7 item-bounce"
+      ><img src="{% static 'assets/images/img/6.png '%}" alt=""
+    /></span>
+  </div>
+  <div class="container">
+    <nav
+      class="popular-tab-nav d-flex flex-wrap justify-content-between align-items-center margin-bottom-60">
+    </nav>
+    <!-- main-content -->
+    <div class="tab-content" id="nav-tabContent-1">
+      <!-- food 1 -->
+      <div
+        class="tab-pane fade show active"
+        id="food1"
+        role="tabpanel"
+        aria-labelledby="food1-tab"
+      >
+      <div class="search-container">
+        <form action="{% url 'search_recipe' %}" method="GET">
+          <input type="text" id="recipeSearch" name="q" placeholder="Search recipes..." autocomplete="off">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div class="row">
+        {% for data in recipe %}
+          <div
+            class="col-xl-3 col-lg-3 col-md-6 wow fadeInUp"
+            data-wow-delay=".6s"
+          >
+            <div class="single-dishes">
+              <div class="dish-img">
+                <!-- <img
+                src="/static/assets/images/recipeimage/{{data.recipe_image}}"
+                style="width:140px; height: 140px; border-radius: 70%; margin-top: 30px;"
+                alt="recipe_img"
+                /> -->
+              <img
+                src="/static/assets/images/recipeimage/{{data.recipe_image}}"
+                style="width:140px; height: 140px;"
+                alt="recipe_img"
+              />
+              </div>
+              <div class="dish-content">
+                <h5><a href="/client/single_recipe/{{data.recipe_id}}" value="{{data.recipe_id}}">{{data.recipe_name}}</a></h5>
+
+              {% if data.recipe_video %}
+                 <a href="/client/recipe_video/{{data.recipe_id}}">{{data.recipe_name}}</a>
+              {% endif %}                <p>
+                  {{data.recipe_desc|slice:":100"}}
+                </p>
+                <a href="/client/single_recipe/{{data.recipe_id}}">see more</a>
+              </div>
+              <div class="cart-opt">
+                <span>
+                  <form method="post" action="/client/wishlist/">
+                    {% csrf_token %}  
+                  <input type="hidden" name="recid" value="{{data.recipe_id}}">
+                  <span>
+                    <button
+                      style="
+                        background-color: transparent;
+                        border: none;
+                        color: inherit;
+                        cursor: pointer;
+                        padding: 0;
+                        font: inherit;
+                        text-decoration: none;
+                        display: inline;
+                      "
+                      type="submit"
+                      href="/client/wishlist/{{data.recipe_id}}"
+                    >
+                      <i
+                        class="fas fa-heart"
+                        style="padding: 5px; color: #47b1d8; font-size: 1.5em"
+                      ></i>
+                    </button>
+                  </span>                
+                </form>
+                </span>
+                <!-- <span>   
+                  <a href="single-food.html"
+                    ><i class="fas fa-shopping-basket"></i
+                  ></a>
+                </span> -->
+              </div>
+            </div>
+          </div>
+         {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- pagination-area -->
+<div class="pagination" style="margin-left: 40%;">
+  <div class="container">
+    <div class="pagination">
+      <ul class="pagination" style="display: flex;">
+        {% if recipe.has_previous %}
+          <li><a href="?page={{ recipe.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        
+        {% for i in recipe.paginator.page_range %}
+          {% if recipe.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        
+        {% if recipe.has_next %}
+          <li><a href="?page={{ recipe.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

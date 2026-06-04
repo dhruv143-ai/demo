@@ -1,0 +1,87 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+				
+				<h6 class="mb-0 text-uppercase">Report 2 </h6><br/>
+                <div class = "container">
+                <form method="POST">
+                    {% csrf_token %}
+                    <h6>Category</h6>
+                    <select id="bsValidation9" name="category_id">
+                        <option selected disabled value>...</option>
+                        {% for data in category %}
+                        <option value="{{ data.category_id }}">{{ data.category_name }}</option>
+                        {% endfor %}
+                      </select><br><br>
+                      <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+				<hr/>
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="example2" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Recipe ID</th>
+										<th>Name</th>
+										<th>Description</th>
+                                        <th>Ingredients</th>
+										<th>Steps</th>
+										<th>Category Name</th>
+										<th>Sub Category Name</th>
+                                        <th>Preparation Time</th>
+										<th>Cooking Time</th>
+                                        <th>Video</th>
+										<th>Image</th>
+										<th>Calories</th>
+										<th>Fat</th>
+										<th>Carbs</th>
+										<th>Protein</th>
+										<th>Image 1</th>
+										<th>Image 2</th>
+										<th>Image 3</th>
+										<th>Image 4</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for data in recipe %}
+									<tr>
+										<td>{{data.recipe_id}}</td>
+										<td>{{data.recipe_name}}</td>
+										<td>{{ data.recipe_desc|slice:":70" }} <a href="/updaterecipe/{{data.recipe_id}}">see more</a></td>
+                                        <td>{{data.ingridents|slice:":60"}} <a href="/updaterecipe/{{data.recipe_id}}">see more</a></td>
+										<td>{{data.steps|slice:":60"}} <a href="/updaterecipe/{{data.recipe_id}}">see more</a></td>
+										<td>{{data.sub_category_id.category_id.category_name}}</td>
+										<td>{{data.sub_category_id.sub_category_name}}</td>
+                                        <td>{{data.recipe_prepare_time}}</td>
+										<td>{{data.recipe_cooking_time}}</td>
+                                        <td>{{data.recipe_video}}</td>
+										<td> <img src="/static/assets/images/recipeimage/{{data.recipe_image}}" alt="img-gallery" style="height:40px;width:40px"></td>
+										<td>{{data.calories}}</td>
+										<td>{{data.fat}}</td>
+										<td>{{data.carbs}}</td>
+										<td>{{data.protein}}</td>
+                                        <td> <img src="/static/assets/images/recipeimage/{{data.recipe_image1}}" alt="img-gallery" style="height:40px;width:40px"></td>
+										<td> <img src="/static/assets/images/recipeimage/{{data.recipe_image2}}" alt="img-gallery" style="height:40px;width:40px"></td>
+										<td> <img src="/static/assets/images/recipeimage/{{data.recipe_image3}}" alt="img-gallery" style="height:40px;width:40px"></td>
+										<td> <img src="/static/assets/images/recipeimage/{{data.recipe_image4}}" alt="img-gallery" style="height:40px;width:40px"></td>
+									</tr>
+									{% endfor %}
+                                  
+								</tbody>
+								<tfoot>
+
+								</tfoot>
+							</table>
+									
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end page wrapper -->
+{% endblock %}

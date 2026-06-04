@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!-- saved from url=(0157)https://dede3phc22dgx.cloudfront.net/thread_output/90f332d1-0870-45eb-81a5-4d8ae10d086a/a8316330-a021-70b4-d17c-598a0d854895/kitchenkoach_user_flowchart.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KitchenKoach - User Module Flowchart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 50px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Flowchart Shapes */
+        .oval {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 22px 60px;
+            border-radius: 100px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 17px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+            min-width: 220px;
+            letter-spacing: 0.5px;
+        }
+
+        .rectangle {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 22px 45px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.25);
+            min-width: 280px;
+        }
+
+        .diamond {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 35px;
+            transform: rotate(45deg);
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 8px 25px rgba(250, 112, 154, 0.3);
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .diamond-text {
+            transform: rotate(-45deg);
+            max-width: 130px;
+            line-height: 1.5;
+        }
+
+        .homepage {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 28px 55px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.3);
+            min-width: 320px;
+        }
+
+        .user-functions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin: 35px 0;
+            max-width: 850px;
+        }
+
+        .function-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #1a1a2e;
+            padding: 24px 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .function-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: #4facfe;
+        }
+
+        .error-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            min-width: 220px;
+        }
+
+        .arrow {
+            width: 4px;
+            height: 45px;
+            background: linear-gradient(180deg, #6c757d 0%, #495057 100%);
+            position: relative;
+            margin: 8px 0;
+            border-radius: 2px;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 14px solid #495057;
+        }
+
+        .arrow-horizontal {
+            height: 4px;
+            width: 90px;
+            background: linear-gradient(90deg, #6c757d 0%, #495057 100%);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .arrow-horizontal.left::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 14px solid #495057;
+        }
+
+        .arrow-horizontal.right::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 14px solid #495057;
+        }
+
+        .decision-row {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            margin: 25px 0;
+        }
+
+        .label {
+            font-weight: 700;
+            color: #1a1a2e;
+            font-size: 15px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 3px solid #495057;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .branch-container {
+            display: flex;
+            gap: 120px;
+            align-items: flex-start;
+            margin: 35px 0;
+        }
+
+        .branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .functions-title {
+            color: #1a1a2e;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 35px 0 25px 0;
+            text-align: center;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .functions-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 2px;
+        }
+
+        .back-arrow {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-arrow::before {
+            content: '↻';
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .user-functions {
+                grid-template-columns: 1fr;
+            }
+
+            .branch-container {
+                flex-direction: column;
+                gap: 40px;
+                align-items: center;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .flowchart > * {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Module Flowchart</h1>
+        <p class="subtitle">KitchenKoach Web Application</p>
+
+        <div class="flowchart">
+            <!-- Start -->
+            <div class="oval">START</div>
+            <div class="arrow"></div>
+
+            <!-- User Registration / Login -->
+            <div class="rectangle">User Registration / Login</div>
+            <div class="arrow"></div>
+
+            <!-- Decision Diamond -->
+            <div class="diamond">
+                <div class="diamond-text">Are login credentials valid?</div>
+            </div>
+
+            <!-- Decision Branches -->
+            <div class="branch-container">
+                <!-- NO Branch -->
+                <div class="branch">
+                    <div class="label">NO</div>
+                    <div class="error-box">Show Error Message</div>
+                    <div class="arrow"></div>
+                    <div class="back-arrow">Back to Login</div>
+                </div>
+
+                <!-- YES Branch -->
+                <div class="branch">
+                    <div class="label">YES</div>
+                    <div class="arrow"></div>
+                    <div class="homepage">Home Page</div>
+
+                    <!-- User Functions -->
+                    <div class="functions-title">Available User Functions</div>
+                    <div class="user-functions">
+                        <div class="function-box">
+                            <div>📚 Browse Recipes</div>
+                        </div>
+                        <div class="function-box">
+                            <div>💳 View Subscription Plans</div>
+                        </div>
+                        <div class="function-box">
+                            <div>✨ Subscribe to Plan</div>
+                        </div>
+                        <div class="function-box">
+                            <div>🛒 Add Product to Cart</div>
+                        </div>
+                        <div class="function-box">
+                            <div>📦 Place Order</div>
+                        </div>
+                        <div class="function-box">
+                            <div>⭐ Write Review</div>
+                        </div>
+                    </div>
+
+                    <div class="arrow"></div>
+
+                    <!-- Logout -->
+                    <div class="rectangle">Logout</div>
+                    <div class="arrow"></div>
+
+                    <!-- End -->
+                    <div class="oval">END</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body></html>

@@ -1,0 +1,96 @@
+{% extends 'c_header.html' %}
+{% block content %}
+{% load static %}
+
+<!-- breadcrumb-area -->
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+    <div class="bread-shapes">
+        <span class="b-shape-1 item-bounce"><img src="{% static 'assets/images/img/5.png' %}" alt=""></span>
+        <span class="b-shape-2"><img src="{% static 'assets/images/img/6.png' %}" alt=""></span>
+        <span class="b-shape-3"><img src="{% static 'assets/images/img/7.png' %}" alt=""></span>
+        <span class="b-shape-4"><img src="{% static 'assets/images/img/9.png' %}" alt=""></span>
+        <span class="b-shape-5"><img src="{% static 'assets/images/shapes/18.png' %}" alt=""></span>
+        <span class="b-shape-6 item-animateOne"><img src="{% static 'assets/images/img/7.png' %}" alt=""></span>
+    </div>
+    <div class="container padding-top-120">
+        <div class="row justify-content-center">
+            <nav aria-label="breadcrumb text-center">
+                <h2 class="page-title">recipe videos</h2>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Content Section -->
+<section class="blog-content-section padding-top-110 padding-bottom-120">
+    <div class="blog-shapes">
+        <span class="bbs-1"><img src="{% static 'assets/images/shapes/13.png' %}" alt=""></span>
+        <span class="bbs-2 item-bounce"><img src="{% static 'assets/images/shapes/12.png' %}" alt=""></span>
+        <span class="bbs-3"><img src="{% static 'assets/images/shapes/7.png' %}" alt=""></span>
+        <span class="bbs-4 item-bounce"><img src="{% static 'assets/images/shapes/26.png' %}" alt=""></span>
+        <span class="bbs-5 item-animateTwo"><img src="{% static 'assets/images/shapes/26.png' %}" alt=""></span>
+        <span class="bbs-6"><img src="{% static 'assets/images/shapes/16.png' %}" alt=""></span>
+        <span class="bbs-7"><img src="{% static 'assets/images/img/32.png' %}" alt=""></span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="blog-posts">
+                    <div class="blog-single-post wow fadeInUp">
+                        <div class="blog-thumbnail-video">
+                            <a href="blog-single.html">
+                                <video controls>
+                                    <source src="/static/assets/images/recipeimage/{{ recipe.recipe_video }}" type="video/mp4" />
+                                </video>
+                            </a>
+                            <div class="video-play-button">
+                                <a href="https://www.youtube.com/watch?v=8AGgbIQyqR8" class="button-video">
+                                    <!-- <i class="fa fa-play item-ripple"></i> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog-content-part">
+                            <div class="blog-content-top">
+                                <!-- <div class="blog-date margin-right-20">
+                                    <a href="#"><i class="fas fa-tag">  {{ recipe.recipe_name }}</i></a>
+                                </div>
+                                <div class="blog-tag margin-right-20">
+                                    <a href="#"><i class="fas fa-user-circle"> {{ recipe.user_id.user_name }}</i></a>
+                                </div> -->
+                                <div class="blog-author">
+                                    <!-- <a href="#"><i class="fas fa-comments"></i> 120+ Comment</a> -->
+                                </div>
+                            </div>
+                            <div class="blog-title">
+                                <h4><a href="blog-single.html">How to make {{ recipe.recipe_name }} like a true Master</a></h4>
+                            </div>
+                            <div class="blog-content">
+                                <p>Organizations today are in constant flux. Industries are consolidating, business models are emerging, new technologies are being developed, and consumer behaviors are evolving.</p>
+                            </div>
+                            <div class="blog-excerpt-link">
+                                <a href="/client/single_recipe/{{ recipe.recipe_id }}" class="btn">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="col-lg-3">
+                <div class="blog-sidebar margin-top-10">
+                    <div class="single-widget wow fadeInUp author-widget">
+                        <img src="/static/assets/images/user_image/{{recipe.user_id.profile_pic}}" alt="image">
+                        <div class="author-name margin-top-20">
+                            <h5>{{recipe.user_id.user_name}}</h5>
+                        </div>
+                        <div class="author-content margin-top-10">
+                            <p> Hi! I'm author of this post. Read my post, be in trend.</p>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

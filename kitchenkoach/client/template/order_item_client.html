@@ -1,0 +1,108 @@
+{% extends "c_header.html" %} {% block content %} {% load static %}
+<!-- breadcrumb-area -->
+
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+  <div class="bread-shapes">
+    <span class="b-shape-1 item-bounce"
+      ><img src="{% static 'assets/images/img/5.png' %}" alt=""
+    /></span>
+
+    <span class="b-shape-2"
+      ><img src="{% static 'assets/images/img/6.png' %}" alt=""
+    /></span>
+
+    <span class="b-shape-3"
+      ><img src="{% static 'assets/images/img/7.png' %}" alt=""
+    /></span>
+
+    <span class="b-shape-4"
+      ><img src="{% static 'assets/images/img/9.png' %}" alt=""
+    /></span>
+
+    <span class="b-shape-5"
+      ><img src="{% static 'assets/images/shapes/18.png' %}" alt=""
+    /></span>
+
+    <span class="b-shape-6 item-animateOne"
+      ><img src="{% static 'assets/images/img/7.png' %}" alt=""
+    /></span>
+  </div>
+
+  <div class="container padding-top-120">
+    <div class="row justify-content-center">
+      <nav aria-label="breadcrumb">
+        <h2 class="page-title">Order Items</h2>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- wishlist-area -->
+
+<section class="wishlist-area padding-top-120 padding-bottom-120">
+  <div class="container">
+    <h3 class="text-center margin-bottom-30">My Recipe</h3>
+
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Recipe</th>
+            <th>Ingridents</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for data in recipe %}
+          <tr>
+            <td>
+              <a value="{{data.recipe_id}}">{{data.recipe_name}}</a>
+            </td>
+
+            <td>{{data.ingridents}}</td>
+
+            <td>
+              <a
+                class="delete-product"
+                href="/client/delwish/{{data.wishlist_id}}"
+                ><i class="fa-regular fa-trash-can"></i
+              ></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination" style="margin-left: 40%;">
+      <div class="container">
+        <div class="pagination">
+          <ul class="pagination" style="display: flex;">
+            {% if recipe.has_previous %}
+              <li><a href="?page={{ recipe.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            
+            {% for i in recipe.paginator.page_range %}
+              {% if recipe.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            
+            {% if recipe.has_next %}
+              <li><a href="?page={{ recipe.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

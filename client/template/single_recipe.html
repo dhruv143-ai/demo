@@ -1,0 +1,262 @@
+{% extends "c_header.html" %} {% block content %} {% load static %}
+
+<!-- Mirrored from html.imjol.com/khadyo/khadyo/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 Dec 2024 11:12:02 GMT -->
+
+
+<!-- breadcrumb-area -->
+<div class="banner-area breadcrumb-area padding-top-120 padding-bottom-90">
+    <div class="bread-shapes">
+        <span class="b-shape-1 item-bounce"><img src="{% static 'assets/images/img/5.png' %}" alt=""></span>
+        <span class="b-shape-2"><img src="{% static 'assets/images/img/6.png' %}" alt=""></span>
+        <span class="b-shape-3"><img src="{% static 'assets/images/img/7.png' %}" alt=""></span>
+        <span class="b-shape-4"><img src="{% static 'assets/images/img/9.png' %}" alt=""></span>
+        <span class="b-shape-5"><img src="{% static 'assets/images/shapes/18.png' %}" alt=""></span>
+        <span class="b-shape-6 item-animateOne"><img src="{% static 'assets/images/img/7.png' %}" alt=""></span>
+    </div>
+    <div class="container padding-top-120">
+        <div class="row justify-content-center">
+            <nav aria-label="breadcrumb text-center">
+                <h2 class="page-title">single recipe</h2>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Content Section -->
+<section class="blog-content-section blog-details-page padding-120">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <div class="blog-posts">
+                    <div class="blog-single-post">
+                        <div class="blog-thumbnail wow fadeInUp">
+                            <img src="/static/assets/images/recipeimage/{{recipe.recipe_image}}" style="height:550px;
+                                width:600px;" alt="" />
+
+                        </div>
+                        <div class="blog-content-part">
+                            <div class="blog-content-top">
+                                <div class="blog-date margin-right-20">
+                                    <a href="#"><i class="fas fa-tag"></i>{{recipe.recipe_name}}</a>
+                                </div>
+                                <div class="blog-tag margin-right-20">
+                                    <a href="#"><i class="fas fa-user-circle"></i>{{recipe.user_id.user_name}}</a>
+                                </div>
+                                <div class="blog-author">
+                                    <a href="#post-review"><i class="fas fa-comments"></i> view review</a>
+                                </div>
+                                <form method="post" action="/client/wishlist/">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="recid" value="{{recipe.recipe_id}}">
+                                    <button type="submit" href="/client/wishlist/" class="btn margin-top-40">Add to
+                                        wishlist</button>
+                            </div>
+                            <div class="blog-title">
+                                <h4> {{recipe.recipe_name}}</h4>
+                            </div>
+                            <div class="blog-content wow fadeInUp">
+                                <h5>Description</h5>
+                                <ul>
+                                    {% for i in desc %}
+                                    <li>
+                                        {{i}}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+                            <div class="blog-title">
+
+                            </div>
+                            <div class="blog-content  wow fadeInUp">
+
+                            </div>
+                            <div class="blog-images margin-top-30">
+                                <div class="row" style="margin: 0;">
+
+                                    <!-- First Image (Left side) -->
+                                    <div class="col-sm-6 wow fadeInLeft">
+                                        <div class="single-image" style="padding-left: 5%;">
+                                            <img src="/static/assets/images/recipeimage/{{recipe.recipe_image1}}"
+                                                style="width: 87%; height: 490px;" alt="{{recipe.recipe_name}}" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Second, Third, and Fourth Images (Right side) -->
+                                    <div class="col-sm-6 wow fadeInRight">
+                                        <div class="row" style="padding-right: 25%;">
+
+                                            <!-- Second Image -->
+                                            <div class="col-sm-12" style="padding-bottom: 15px;">
+                                                <div class="single-image image-2">
+                                                    <img src="/static/assets/images/recipeimage/{{recipe.recipe_image2}}"
+                                                        style="width: 100%; height: 330px;"
+                                                        alt={{recipe.recipe_name}} />
+                                                </div>
+                                            </div>
+
+                                            <!-- Third and Fourth Images Side by Side -->
+                                            <div class="col-sm-6" style="padding-right: 6%;">
+                                                <div class="single-image">
+                                                    <img src="/static/assets/images/recipeimage/{{recipe.recipe_image3}}"
+                                                        style="width: 100%; height: 150px;"
+                                                        alt={{recipe.recipe_name}} />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" style="padding-right: 6%;">
+                                                <div class="single-image image-2">
+                                                    <img src="/static/assets/images/recipeimage/{{recipe.recipe_image4}}"
+                                                        style="width: 100%; height: 150px;"
+                                                        alt={{recipe.recipe_name}} />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="blog-quote margin-top-30 margin-bottom-30  wow fadeInUp">
+                                <div class="quote-text">
+                                    <table style="width:50%;">
+                                        <thead>
+                                            <p>
+                                            <h5>Nutrition Facts (per serving)</h5>
+                                            <tr style="font-family: CascadiaCode;">
+                                                <th>Fats</th>
+                                                <th>Carbs</th>
+                                                <th>Protein</th>
+                                                <th>Calories</th>
+                                            </tr>
+                                        </thead>
+                                        </p>
+                                        <tbody>
+                                            <tr style="font-family:'Arial Black';">
+                                                <td>{{recipe.fat}}</td>
+                                                <td>{{recipe.carbs}}</td>
+                                                <td>{{recipe.protein}}</td>
+                                                <td>{{recipe.calories}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                            <h5>Ingredients</h5><br>
+                            <table border="1" cellpadding="5" cellspacing="0">
+                                <tbody>
+                                    {% for i in ingridents %}
+                                    <tr>
+                                        <td>{{ i }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table><br>
+                            <h4>Steps to prepare {{recipe.recipe_name}}</h4><br>
+                            <ul>
+                                {% for i in step %}
+                                <li>
+                                    {{i}}
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                            <div class="blog-title">
+                                <h6>
+                                    Preparation Time : {{recipe.recipe_prepare_time}}
+                                </h6>
+                                <h6>
+                                    Cooking Time : {{recipe.recipe_cooking_time}}
+                                </h6>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- divider -->
+                    <div class="divider"></div>
+
+
+                    <!-- blog comment area -->
+                    <div class="blog-comment-area  wow fadeInUp" id="post-review">
+                        {% for review in review %}
+                        <div class="single-comment">
+                            <div class="comment-image">
+                                <img src="/static/assets/images/user_image/{{review.user_id.profile_pic}}"
+                                    alt="profile_img"
+                                    style="height: 50px; width: 50px; border-radius: 50%; margin-top: 10px;" />
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-content-top">
+                                    <div class="content-top-left">
+                                        <h6>{{review.user_id.user_name}}</h6>
+                                        <span>{{review.review_date}}</span>
+                                    </div>
+                                    <!-- <a href="#" class="reply">reply</a> -->
+                                </div>
+                                <p class="margin-top-10">{{review.review_feedback}}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                       
+                    </div>
+                    <div class="blog-comment-form margin-top-60  wow fadeInUp">
+                        <div class="comment-title">
+                            <h4>leave a reply</h4>
+                            <form method="post" action="/client/insreview/">
+                                <input type="hidden" name="recid" value="{{recipe.recipe_id}}">
+                                {% csrf_token %}
+
+                                <textarea name="feedback" placeholder="Write your text" id="comment-form" cols="30"
+                                    rows="10"></textarea>
+                                <button type="submit" href="/client/single_recipe/{{data.recipe_id}}"
+                                    class="btn margin-top-40">post comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="blog-sidebar">
+                    <div class="single-widget author-widget  wow fadeInUp">
+                        <img src="/static/assets/images/user_image/{{recipe.user_id.profile_pic}}" alt="image">
+                        <div class="author-name margin-top-20">
+                            <h5>{{recipe.user_id.user_name}}</h5>
+                        </div>
+                        <div class="author-content margin-top-10">
+                            <p> Hi! I'm author of this recipe.</p>
+                        </div>
+                    </div>
+
+                    <div class="single-widget product-widget  wow fadeInUp">
+                        <center>
+                            <h5 class="margin-bottom-10">Ingredients</h5>
+                        </center>
+                        {% for data in hp %}
+
+                        <div class="single-product d-flex align-items-center">
+                            <div class="dish-img">
+                                <a href="single-food.html"> <img
+                                        src="/static/assets/images/product_image/{{data.product_image}}" style="height:110px; width:110px;"  alt=""></a>
+                            </div>
+                            <div class="dish-content">
+                                <h6> <a href="/client/single_shop/{{data.product_id}}">{{data.product_name}}
+                                    </a></h6>
+                                <span class="price"> {{data.product_price}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+<!-- Mirrored from html.imjol.com/khadyo/khadyo/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 Dec 2024 11:12:04 GMT -->

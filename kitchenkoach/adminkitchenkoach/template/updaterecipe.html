@@ -1,0 +1,217 @@
+{% extends 'header.html' %} {% load static %} {% block content %}
+<!--start page wrapper -->
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous">
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.js"></script>
+
+<style>
+  .parsley-errors-list {
+    color: red;
+  }
+</style>
+<div class="page-wrapper">
+  <div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+      <div class="breadcrumb-title pe-3">Forms</div>
+      <div class="ps-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0 p-0">
+            <li class="breadcrumb-item">
+              <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Validations
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="ms-auto">
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary">Settings</button>
+          <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
+            <a class="dropdown-item" href="javascript:;">Action</a>
+            <a class="dropdown-item" href="javascript:;">Another action</a>
+            <a class="dropdown-item" href="javascript:;">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:;">Separated link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end breadcrumb-->
+
+    <div class="row">
+      <div class="col-xl-6 mx-auto">
+        <div class="card">
+          <div class="card-header px-4 py-3">
+            <h5 class="mb-0">Bootstrap Validation</h5>
+          </div>
+          <div class="card-body p-4">
+            <form method="post" a class="row g-3 needs-validation" data-parsley-validate>
+              {% csrf_token %}
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Name</label>
+                <input type="text" name="recipe_name" value="{{recipe.recipe_name}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe Name" required data-parsley-required-message="Name is required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-md-12">
+                <label for="bsValidation13" class="form-label">Desciption</label>
+                <textarea class="form-control" id="bsValidation13" placeholder="description" name="recipe_desc" rows="3"
+                  required data-parsley-required-message="Desciption is required">{{recipe.recipe_desc}}</textarea>
+                <div class="invalid-feedback">
+                  Please enter a valid address.
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="bsValidation13" class="form-label">Ingrident</label>
+                <textarea class="form-control" id="bsValidation13" placeholder="Ingrident" name="ingridents" rows="3"
+                  required data-parsley-required-message="Ingridents are required">{{recipe.ingridents}}</textarea>
+              </div>
+
+              <div class="col-md-12">
+                <label for="bsValidation13" class="form-label">Steps</label>
+                <textarea class="form-control" id="bsValidation13" placeholder="Write Steps" name="steps" rows="3"
+                  required data-parsley-required-message="Steps are required">{{recipe.steps}}</textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Fats</label>
+                <input type="text" name="fat" value="{{recipe.fat}}" class="form-control" id="bsValidation1"
+                  placeholder="Fats" required data-parsley-required-message="Fats are required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Carbs</label>
+                <input type="text" name="carbs" value="{{recipe.carbs}}" class="form-control" id="bsValidation1"
+                  placeholder="Carbs" required data-parsley-required-message="Carbs are required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Protein</label>
+                <input type="text" name="protein" value="{{recipe.protein}}" class="form-control" id="bsValidation1"
+                  placeholder="Protein" required data-parsley-required-message="Protein are required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Calories</label>
+                <input type="text" name="calories" value="{{recipe.calories}}" class="form-control" id="bsValidation1"
+                  placeholder="Calories" required data-parsley-required-message="Calories are required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="bsValidation9" class="form-label"> Category ID</label>
+                <select id="bsValidation9" name="category_id" class="form-select" required data-parsley-required-message="Category is required">
+                  <option selected disabled value>...</option>
+                  {% for data in category %}
+                  <option value="{{data.category_id}}">
+                    {{data.category_name}}
+                  </option>
+                  {% endfor %}
+                </select>
+
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+
+
+              <div class="col-md-12">
+                <label for="bsValidation9" class="form-label">Sub Category ID</label>
+                <select id="bsValidation9" name="sub_category_id" class="form-select" required data-parsley-required-message="Sub category is required">
+                  <option selected disabled value>...</option>
+                  {% for data in sub_category %}
+                  <option value="{{data.sub_category_id}}">
+                    {{data.sub_category_name}}
+                  </option>
+                  {% endfor %}
+                </select>
+
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Prepare Time</label>
+                <input type="text" name="recipe_prepare_time" value="{{recipe.recipe_prepare_time}}"
+                  class="form-control" id="bsValidation1" placeholder="Recipe prepare time" required data-parsley-required-message="Preparation time is required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Cooking Time</label>
+                <input type="text" name="recipe_cooking_time" value="{{recipe.recipe_cooking_time}}"
+                  class="form-control" id="bsValidation1" placeholder="Recipe Cooking time" required data-parsley-required-message="Cooking time is required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Video</label>
+                <input type="text" name="recipe_video" value="{{recipe.recipe_video}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe video Link" required data-parsley-required-message="Video is required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Image</label>
+                <input type="text" name="recipe_image" value="{{recipe.recipe_image}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe image" required data-parsley-required-message="Image is required"/>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Image 1</label>
+                <input type="text" name="recipe_image1" value="{{recipe.recipe_image1}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe Image" required />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Image 2</label>
+                <input type="text" name="recipe_image2" value="{{recipe.recipe_image2}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe Image" required />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Image 3</label>
+                <input type="text" name="recipe_image3" value="{{recipe.recipe_image3}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe Image" required />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="bsValidation1" class="form-label">Recipe Image 4</label>
+                <input type="text" name="recipe_image4" value="{{recipe.recipe_image4}}" class="form-control"
+                  id="bsValidation1" placeholder="Recipe Image" required />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              
+              <div class="col-md-12">
+                <div class="d-md-flex d-grid align-items-center gap-3">
+                  <button type="submit" class="btn btn-primary px-4">
+                    Submit
+                  </button>
+                  <button type="reset" class="btn btn-light px-4">Reset</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end row-->
+  </div>
+</div>
+<!--end page wrapper -->
+{% endblock %}
